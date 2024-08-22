@@ -20,8 +20,6 @@ const Header = () => {
 
   const handleBurgerClick = () => {
     dispatch(changePopUp(/* true */));
-
-    document.body.classList.toggle('noscroll');
   };
 
   const handleMainLinkClick = (
@@ -29,7 +27,6 @@ const Header = () => {
   ) => {
     if (platform === e.currentTarget.dataset.link) return;
     dispatch(platformSelected(e.currentTarget.dataset.link as string));
-    document.body.classList.remove('noscroll');
   };
 
   const handleTagClick = (
@@ -40,7 +37,6 @@ const Header = () => {
   };
 
   const burgerClassName = popupVisible ? 'burger active' : 'burger';
-
   const tagList = tagsRenderView(tagsData, handleTagClick);
 
   return (

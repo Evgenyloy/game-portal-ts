@@ -12,3 +12,25 @@
 
 .App {
 }
+
+//CSSTransition -----------------------------
+
+.transition-appear {
+  opacity: 0;
+}
+
+.transition-appear-done {
+  opacity: 1;
+  transition: opacity 0.2s;
+}
+
+.transition-enter {
+  opacity: 0;
+}
+
+.transition-enter-done {
+  opacity: 1;
+  transition: opacity 0.2s;
+}
+
+//---------------------------------------------

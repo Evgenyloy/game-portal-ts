@@ -1,6 +1,6 @@
-import { Transition } from 'react-transition-group';
+import { CSSTransition } from 'react-transition-group';
 import { Link } from 'react-router-dom';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 
 import { platformSelected } from '../../slices/headerFiltersSlice';
@@ -14,33 +14,27 @@ const HeaderPopUp = () => {
     (state) => state.headerPopUp.popUpVisible
   );
 
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+  const handleLinkClick = (
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+  ) => {
     if (!(e.target instanceof HTMLAnchorElement)) return;
     dispatch(platformSelected(e.target.dataset.link as string));
     dispatch(changePopUp(/* false */));
   };
 
-  const changeBodyScroll = () => {
-    if (popUpVisible) {
-      document.body.classList.add('noscroll');
-    }
-    if (!popUpVisible) {
-      document.body.classList.remove('noscroll');
-    }
-  };
+  const changeBodyScroll = useCallback(() => {
+    popUpVisible
+      ? document.body.classList.add('noscroll')
+      : document.body.classList.remove('noscroll');
+  }, [popUpVisible]);
 
   useEffect(() => {
     changeBodyScroll();
-  }, [popUpVisible]);
+  }, [popUpVisible, changeBodyScroll]);
 
   const [windowIsOpen, setWindowIsOpen] = useState(false);
   const closePopup = () => {
-    if (window.innerWidth > 650) {
-      setWindowIsOpen(true);
-    }
-    if (window.innerWidth < 650) {
-      setWindowIsOpen(false);
-    }
+    window.innerWidth >= 650 ? setWindowIsOpen(true) : setWindowIsOpen(false);
   };
 
   useEffect(() => {
@@ -53,88 +47,57 @@ const HeaderPopUp = () => {
     if (windowIsOpen) {
       dispatch(changePopUp(/* false */));
     }
-  }, [windowIsOpen, popUpVisible]);
+  }, [windowIsOpen, popUpVisible, dispatch]);
 
-  const duration = 400;
-
-  const defaultStyle = {
-    transition: `all ${duration}ms linear 0s`,
-  };
-
-  const transitionStyles: { [key: string]: any } = {
-    entering: { right: '-100%' },
-    entered: { right: 0 },
-    exiting: { right: '-100%' },
-    exited: { right: '-100%' },
-  };
-
-  const nodeRef = useRef(null);
+  const popUpRef = useRef(null);
+  const popUpLinks = linksRenderView(handleLinkClick);
+  const popUpClass =
+    window.innerWidth >= 650 ? 'popup popup-no-visible' : 'popup';
 
   return (
-    <Transition
-      nodeRef={nodeRef}
+    <CSSTransition
+      nodeRef={popUpRef}
       in={popUpVisible}
+      classNames="my-node"
       timeout={{
-        appear: 0,
-        enter: 0,
-        exit: 450,
+        enter: 400,
+        exit: 400,
       }}
       mountOnEnter
       unmountOnExit
     >
-      {(state) => (
-        <div
-          className="popup"
-          tabIndex={0}
-          style={{ ...defaultStyle, ...transitionStyles[state] }}
-          id="10"
-        >
-          <nav className="popup__nav">
-            <Link
-              to="game_list"
-              className="popup__link"
-              data-link="pc"
-              onClick={handleClick}
-            >
-              pc games
-            </Link>
-            <Link
-              to="game_list"
-              className="popup__link"
-              data-link="browser"
-              onClick={handleClick}
-            >
-              browser games
-            </Link>
-            <Link
-              to="news-list"
-              className="popup__link"
-              data-link="pc"
-              onClick={handleClick}
-            >
-              news
-            </Link>
-            <Link
-              to="."
-              className="popup__link"
-              data-link="pc"
-              onClick={handleClick}
-            >
-              home
-            </Link>
-            <Link
-              to="about"
-              className="popup__link"
-              data-link="pc"
-              onClick={handleClick}
-            >
-              about
-            </Link>
-          </nav>
-        </div>
-      )}
-    </Transition>
+      <div className={popUpClass} ref={popUpRef} tabIndex={0}>
+        <nav className="popup__nav">{popUpLinks}</nav>
+      </div>
+    </CSSTransition>
   );
+};
+
+const linksRenderView = (
+  handleLinkClick: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void
+) => {
+  const linksData = [
+    { name: 'pc games', dataAtr: 'pc', linkTo: 'game_list' },
+    { name: ' browser games', dataAtr: 'browser', linkTo: 'game_list' },
+    { name: ' news', dataAtr: 'pc', linkTo: 'news-list' },
+    { name: ' home', dataAtr: 'pc', linkTo: '.' },
+    { name: 'about', dataAtr: 'pc', linkTo: 'about' },
+  ];
+
+  const links = linksData.map(({ name, dataAtr, linkTo }) => {
+    return (
+      <Link
+        key={name}
+        to={linkTo}
+        className="popup__link"
+        data-link={dataAtr}
+        onClick={handleLinkClick}
+      >
+        {name}
+      </Link>
+    );
+  });
+  return links;
 };
 
 export default HeaderPopUp;

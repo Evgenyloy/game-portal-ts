@@ -59,18 +59,10 @@ const tagsData: ITagsData[] = [
   { name: 'Survival', data: 'survival' },
 ];
 
-const duration = 200;
+const errorMessage = (
+  <div className="mmo__error-message">
+    Something went wrong. Refresh the page or try again later
+  </div>
+);
 
-const defaultStyle = {
-  transition: `opacity ${duration}ms ease-in-out`,
-  opacity: 0,
-};
-
-const transitionStyles = {
-  entering: { opacity: 1 },
-  entered: { opacity: 1 },
-  exiting: { opacity: 0 },
-  exited: { opacity: 0 },
-};
-
-export { tagList, tagsData, duration, defaultStyle, transitionStyles };
+export { tagList, tagsData, errorMessage };
