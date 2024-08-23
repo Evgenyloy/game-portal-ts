@@ -1,0 +1,282 @@
+.game {
+  position: relative;
+  padding: 50px 0;
+  max-width: 950px;
+  margin: 0 auto;
+  min-height: 110vh;
+  &__title {
+    font-weight: 450;
+    line-height: 1.2;
+    color: #3e3f3a;
+    font-size: calc(18px + 20 * ((100vw - 320px) / (1280 - 320)));
+    text-align: center;
+
+    margin-bottom: 20px;
+  }
+  &__wrapper {
+    padding: 0 5px;
+    display: flex;
+    max-width: 900px;
+    margin: 0 auto;
+    gap: 15px;
+  }
+  &__col-1 {
+    flex: 1 0 25%;
+  }
+
+  &__img-cont {
+    position: relative;
+    max-width: 215px;
+    height: 145px;
+    overflow: hidden;
+    margin-bottom: 15px;
+    border-radius: 3px;
+  }
+  &__screenshots {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    cursor: pointer;
+    transition: all 0.15s linear;
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+
+  &__img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    border-radius: 3px;
+    transition: all 0.2s linear;
+  }
+  &__information-list,
+  &__requirements-list {
+    border-radius: 4px;
+    background-color: #f4f4f4;
+    padding: 4px;
+    margin-bottom: 20px;
+  }
+  &__information-title,
+  &__requirements-title {
+    font-size: calc(14px + 10 * ((100vw - 320px) / (1280 - 320)));
+    font-weight: 450;
+    color: #3e3f3a;
+    margin-bottom: 15px;
+  }
+  &__information,
+  &__requirements {
+    font-size: calc(15px + 3 * ((100vw - 320px) / (1280 - 320)));
+    padding: 4px;
+    line-height: 1.2;
+    color: #3e3f3a;
+
+    span {
+      color: #8e8c84;
+    }
+    &:not(:last-child) {
+      margin-bottom: 10px;
+    }
+  }
+
+  &__spinner {
+    display: flex;
+    max-width: 950px;
+    margin: 0 auto;
+    min-height: 100vh;
+    align-items: center;
+    justify-items: center;
+    img {
+      display: block;
+      max-width: 400px;
+      height: 400px;
+      object-fit: cover;
+      margin: 0 auto;
+    }
+  }
+  &__description {
+    font-size: calc(15px + 5 * (100vw - 320px) / 1600);
+    line-height: 1.5;
+    color: #3e3f3a;
+    margin-bottom: 70px;
+    a {
+      pointer-events: none;
+      color: #3e3f3a;
+    }
+    p {
+      font-size: calc(15px + 5 * ((100vw - 320px) / (1920 - 320)));
+      line-height: 1.5;
+      color: #3e3f3a;
+      margin-bottom: 20px;
+    }
+  }
+}
+.pop-up {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  img {
+    pointer-events: fill;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 1280px;
+    height: 720px;
+
+    color: transparent;
+    font-size: 0;
+  }
+
+  span {
+    svg {
+      cursor: pointer;
+      fill: #fff;
+      position: fixed;
+      top: 75px;
+      right: 20px;
+      width: 25px;
+      height: 25px;
+      text-align: center;
+
+      transition: all 0.1s linear;
+
+      z-index: 10;
+    }
+  }
+}
+
+.screenshots-block {
+  transition: all 0.2s linear;
+  overflow: hidden;
+}
+
+.screenshots-title {
+  margin-top: 30px;
+  display: block;
+  font-size: 22px;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #666861;
+  cursor: pointer;
+  transition: all 0.1s linear;
+  &:hover {
+    color: #000000;
+  }
+  svg {
+    display: inline-block;
+    position: relative;
+    top: 4px;
+  }
+}
+
+.opacity {
+  opacity: 0;
+  visibility: 0;
+}
+
+.img-transition-enter {
+  opacity: 0;
+}
+.img-transition-enter-active {
+  opacity: 1;
+  transition: opacity 0.2s;
+}
+.img-transition-exit {
+  opacity: 1;
+}
+.img-transition-exit-active {
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+@media (max-width: 600px) {
+  .game {
+    &__wrapper {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &__col-1 {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    &__img-cont {
+      width: 150px;
+      height: 100px;
+      margin: 0;
+    }
+    &__screenshots {
+      max-width: 150px;
+      height: 100px;
+    }
+  }
+  .pop-up {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+
+    img {
+      pointer-events: fill;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+      width: 1280px;
+      height: 720px;
+    }
+  }
+  .screenshots-title {
+    display: none;
+  }
+  .screenshots-block {
+    height: auto !important;
+    display: flex;
+    gap: 10px;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+}
+
+.none {
+  display: none;
+}
+@media (max-width: 500px) {
+  .game {
+    &__img-cont {
+      height: 80px;
+    }
+    &__screenshots {
+      height: 80px;
+    }
+  }
+}
+@media (max-width: 400px) {
+  .game {
+    &__img-cont {
+      height: 50px;
+    }
+    &__screenshots {
+      height: 50px;
+    }
+    &__col-1 {
+      gap: 5px;
+    }
+  }
+  .screenshots-block {
+    gap: 5px;
+  }
+}

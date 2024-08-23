@@ -37,3 +37,30 @@ export interface IGamesList {
   thumbnail: string;
   title: string;
 }
+
+export interface IGame {
+  description: string;
+  developer: string;
+  game_url: string;
+  genre: string;
+  id: number;
+  minimum_system_requirements: ISystemRequirements;
+  platform: string;
+  profile_url: string;
+  publisher: string;
+  release_date: string;
+  screenshots: IScreenshots[];
+  short_description: string;
+  status: string;
+  thumbnail: string;
+  title: string;
+}
+
+export interface ISystemRequirements {
+  [key: string]: string;
+}
+
+export interface IScreenshots {
+  id: number;
+  image: string;
+}

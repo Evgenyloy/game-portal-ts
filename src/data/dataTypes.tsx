@@ -1,4 +1,4 @@
-export type TTagsList = string[];
+export type TTagsListData = string[];
 export interface ITagsData {
   name: string;
   data: string;

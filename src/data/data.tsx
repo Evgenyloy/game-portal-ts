@@ -1,6 +1,6 @@
-import { ITagsData, TTagsList } from './dataTypes';
+import { ITagsData, TTagsListData } from './dataTypes';
 
-const tagList: TTagsList = [
+const tagListData: TTagsListData = [
   'mmorpg',
   'shooter',
   'strategy',
@@ -65,4 +65,4 @@ const errorMessage = (
   </div>
 );
 
-export { tagList, tagsData, errorMessage };
+export { tagListData, tagsData, errorMessage };
