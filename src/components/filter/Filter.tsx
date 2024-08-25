@@ -1,4 +1,4 @@
-import { tagListData } from '../../data/data';
+import { tagListData, TTagsListData } from '../../data/data';
 import {
   platformSelected,
   categorySelected,
@@ -8,7 +8,8 @@ import {
 import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
 import './filter.scss';
 import { BiSearchAlt2 } from 'react-icons/bi';
-import { TTagsListData } from '../../data/dataTypes';
+import { TMouseEvent } from '../../types/types';
+import { isHTMLElement } from '../../tools/tools';
 
 const Filter = () => {
   const dispatch = useAppDispatch();
@@ -16,43 +17,20 @@ const Filter = () => {
     (state) => state.filters
   );
 
-  const handlePlatformSelected = (
-    e: React.MouseEvent<HTMLLIElement, MouseEvent>
-  ) => {
-    if (!(e.target instanceof HTMLLIElement)) return;
+  const handlePlatformSelected = (e: TMouseEvent) => {
+    if (!isHTMLElement(e.target)) return;
     dispatch(platformSelected(e.target.dataset.value as string));
   };
 
-  const handleTagSelected = (
-    e: React.MouseEvent<HTMLLIElement, MouseEvent>
-  ) => {
-    if (!(e.target instanceof HTMLLIElement)) return;
+  const handleTagSelected = (e: TMouseEvent) => {
+    if (!isHTMLElement(e.target)) return;
     dispatch(categorySelected(e.target.dataset.value as string));
   };
 
-  const handleSort = (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
-    if (!(e.target instanceof HTMLLIElement)) return;
+  const handleSort = (e: TMouseEvent) => {
+    if (!isHTMLElement(e.target)) return;
     dispatch(sortBy(e.target.dataset.value as string));
   };
-
-  const tagItemsRender = (tagListData: TTagsListData) => {
-    const tagList = tagListData.map((item: string) => {
-      return (
-        <li
-          className="dropdown__list-item"
-          data-value={item}
-          onClick={handleTagSelected}
-          id="categorySelected"
-          key={item}
-        >
-          {item}
-        </li>
-      );
-    });
-    return tagList;
-  };
-
-  const tagList = tagItemsRender(tagListData);
 
   let selectedPlatform;
   switch (platform) {
@@ -70,37 +48,16 @@ const Filter = () => {
       break;
   }
 
+  const platformList = platformItemsRender(handlePlatformSelected);
+  const tagList = tagItemsRender(tagListData, handleTagSelected);
+  const sortList = sortItemsRender(handleSort);
+
   return (
     <div className="gamelist-filter">
       <div className="dropdown">
         <span>Platforms:</span>
         <div className="dropdown__button">{selectedPlatform}</div>
-        <ul className="dropdown__list">
-          <li
-            className="dropdown__list-item"
-            data-value="all"
-            onClick={handlePlatformSelected}
-            id="platformSelected"
-          >
-            All Platforms
-          </li>
-          <li
-            className="dropdown__list-item"
-            data-value="pc"
-            onClick={handlePlatformSelected}
-            id="platformSelected"
-          >
-            PC (Windows)
-          </li>
-          <li
-            className="dropdown__list-item"
-            data-value="browser"
-            onClick={handlePlatformSelected}
-            id="platformSelected"
-          >
-            web browser
-          </li>
-        </ul>
+        <ul className="dropdown__list">{platformList}</ul>
       </div>
       <div className="dropdown">
         <span>Genre/Tag:</span>
@@ -110,40 +67,7 @@ const Filter = () => {
       <div className="dropdown">
         <span>sortBy:</span>
         <div className="dropdown__button">{sort}</div>
-        <ul className="dropdown__list ">
-          <li
-            className="dropdown__list-item"
-            data-value="relevance"
-            onClick={handleSort}
-            id="sortBy"
-          >
-            relevance
-          </li>
-          <li
-            className="dropdown__list-item"
-            data-value="popularity"
-            onClick={handleSort}
-            id="sortBy"
-          >
-            popularity
-          </li>
-          <li
-            className="dropdown__list-item"
-            data-value="release-date"
-            onClick={handleSort}
-            id="sortBy"
-          >
-            release date
-          </li>
-          <li
-            className="dropdown__list-item"
-            data-value="alphabetical"
-            onClick={handleSort}
-            id="sortBy"
-          >
-            alphabetical
-          </li>
-        </ul>
+        <ul className="dropdown__list ">{sortList}</ul>
       </div>
       <div className="filter">
         <input
@@ -156,6 +80,75 @@ const Filter = () => {
       </div>
     </div>
   );
+};
+
+const tagItemsRender = (
+  tagListData: TTagsListData,
+  handleTagSelected: (e: TMouseEvent) => void
+) => {
+  const tagList = tagListData.map((item: string) => {
+    return (
+      <li
+        className="dropdown__list-item"
+        data-value={item}
+        onClick={handleTagSelected}
+        id="categorySelected"
+        key={item}
+      >
+        {item}
+      </li>
+    );
+  });
+  return tagList;
+};
+
+const platformItemsRender = (
+  handlePlatformSelected: (e: TMouseEvent) => void
+) => {
+  const platformData = [
+    { name: 'All platform', dataAtr: 'all', id: 'platformSelected' },
+    { name: 'PC (Windows)', dataAtr: 'pc', id: 'platformSelected' },
+    { name: 'web browser', dataAtr: 'browser', id: 'platformSelected' },
+  ];
+
+  const platformList = platformData.map(({ name, dataAtr, id }) => {
+    return (
+      <li
+        className="dropdown__list-item"
+        data-value={dataAtr}
+        onClick={handlePlatformSelected}
+        id={id}
+        key={name}
+      >
+        {name}
+      </li>
+    );
+  });
+  return platformList;
+};
+
+const sortItemsRender = (handleSort: (e: TMouseEvent) => void) => {
+  const sortData = [
+    { name: 'relevance', dataAtr: 'relevance', id: 'sortBy' },
+    { name: 'popularity', dataAtr: 'popularity', id: 'sortBy' },
+    { name: 'release date', dataAtr: 'release-date', id: 'sortBy' },
+    { name: 'alphabetical', dataAtr: 'alphabetical', id: 'sortBy' },
+  ];
+
+  const sortList = sortData.map(({ name, dataAtr, id }) => {
+    return (
+      <li
+        className="dropdown__list-item"
+        data-value={dataAtr}
+        onClick={handleSort}
+        id={id}
+        key={name}
+      >
+        {name}
+      </li>
+    );
+  });
+  return sortList;
 };
 
 export default Filter;

@@ -7,9 +7,8 @@ import { selectNews } from '../../slices/newsSlice';
 import ErrorMessage from '../errorMessage/ErrorMessage';
 import Spinner from '../spinner/Spinner';
 import { useGetNewsListQuery } from '../../api/apiSlice';
-
+import { INews, TNodeRef } from '../../types/types';
 import './newsBlock.scss';
-import { INews } from '../../types/types';
 
 const NewsBlock = () => {
   const dispatch = useAppDispatch();
@@ -33,8 +32,6 @@ const NewsBlock = () => {
     localStorage.setItem('news', JSON.stringify(oneNewsItem));
   };
 
-  //---------------------------------------------------
-
   let newsList = useRef<null | HTMLDivElement>(null);
   const handleButtonClick = useCallback(() => {
     if (newsList.current === null) return;
@@ -44,8 +41,6 @@ const NewsBlock = () => {
   useEffect(() => {
     newsList.current = document.querySelector('.news-list');
   }, [handleButtonClick]);
-
-  //---------------------------------------------------
 
   const nodeRef = useRef(null);
   const content = renderItemsView(onNewsLoaded(news), handleNewsClick, nodeRef);
@@ -74,7 +69,7 @@ const NewsBlock = () => {
 const renderItemsView = (
   newsArr: INews[],
   handleNewsClick: (oneNews: INews) => void,
-  nodeRef: React.MutableRefObject<null>
+  nodeRef: TNodeRef
 ) => {
   let newsItemNum = 1;
 

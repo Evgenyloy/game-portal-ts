@@ -7,6 +7,7 @@ import { platformSelected } from '../../slices/headerFiltersSlice';
 import { changePopUp } from '../../slices/headerPopUpSlice';
 
 import './headerPopUp.scss';
+import { TClickLinkEvent } from '../../types/types';
 
 const HeaderPopUp = () => {
   const dispatch = useAppDispatch();
@@ -14,12 +15,10 @@ const HeaderPopUp = () => {
     (state) => state.headerPopUp.popUpVisible
   );
 
-  const handleLinkClick = (
-    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
-  ) => {
+  const handleLinkClick = (e: TClickLinkEvent) => {
     if (!(e.target instanceof HTMLAnchorElement)) return;
     dispatch(platformSelected(e.target.dataset.link as string));
-    dispatch(changePopUp(/* false */));
+    dispatch(changePopUp());
   };
 
   const changeBodyScroll = useCallback(() => {
@@ -45,7 +44,7 @@ const HeaderPopUp = () => {
   useEffect(() => {
     if (!popUpVisible) return;
     if (windowIsOpen) {
-      dispatch(changePopUp(/* false */));
+      dispatch(changePopUp());
     }
   }, [windowIsOpen, popUpVisible, dispatch]);
 
@@ -73,9 +72,7 @@ const HeaderPopUp = () => {
   );
 };
 
-const linksRenderView = (
-  handleLinkClick: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void
-) => {
+const linksRenderView = (handleLinkClick: (e: TClickLinkEvent) => void) => {
   const linksData = [
     { name: 'pc games', dataAtr: 'pc', linkTo: 'game_list' },
     { name: ' browser games', dataAtr: 'browser', linkTo: 'game_list' },

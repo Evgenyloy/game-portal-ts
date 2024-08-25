@@ -64,3 +64,13 @@ export interface IScreenshots {
   id: number;
   image: string;
 }
+
+export interface IFilteredGamesArgs {
+  platform: string;
+  category: string;
+  sort: string;
+}
+
+export type TNodeRef = React.MutableRefObject<null>;
+export type TMouseEvent = React.MouseEvent<HTMLElement, MouseEvent>;
+export type TClickLinkEvent = React.MouseEvent<HTMLAnchorElement, MouseEvent>;

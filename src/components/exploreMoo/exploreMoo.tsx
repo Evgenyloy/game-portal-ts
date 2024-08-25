@@ -5,7 +5,7 @@ import { useRef } from 'react';
 import Spinner from '../spinner/Spinner';
 import { useGetMmoGamesQuery } from '../../api/apiSlice';
 import { errorMessage } from '../../data/data';
-import { IGamesList } from '../../types/types';
+import { IGamesList, TNodeRef } from '../../types/types';
 import '../exploreMoo/exploreMoo.scss';
 
 const ExploreMmo = () => {
@@ -16,14 +16,14 @@ const ExploreMmo = () => {
     isSuccess,
   } = useGetMmoGamesQuery();
 
-  const onMMoLoaded = (mmo: IGamesList[]) => {
+  const randomGames = (mmo: IGamesList[]) => {
     let randomNum = Math.floor(Math.random() * 150);
     const item = mmo.slice(randomNum, 4 + randomNum);
     return item;
   };
 
   const nodeRef = useRef(null);
-  const items = renderItemsView(onMMoLoaded(mmoList), nodeRef);
+  const items = renderItemsView(randomGames(mmoList), nodeRef);
   const className = isLoading || isError ? 'mmo__spinner' : 'mmo__inner';
 
   return (
@@ -46,10 +46,7 @@ const ExploreMmo = () => {
   );
 };
 
-const renderItemsView = (
-  mmo: IGamesList[],
-  nodeRef: React.MutableRefObject<null>
-) => {
+const renderItemsView = (mmo: IGamesList[], nodeRef: TNodeRef) => {
   const items = (
     <CSSTransition
       classNames="transition"

@@ -9,8 +9,8 @@ import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
 import RandomGame from '../randomGame/RandomGame';
 import { useGetNewsListQuery } from '../../api/apiSlice';
+import { INews, TNodeRef } from '../../types/types';
 import './newsList.scss';
-import { INews } from '../../types/types';
 
 const NewsList = () => {
   const {
@@ -110,7 +110,7 @@ const NewsList = () => {
 
 const renderItemsView = (
   news: INews[],
-  nodeRef: React.MutableRefObject<null>,
+  nodeRef: TNodeRef,
   onNewsClick: (oneNews: INews) => void
 ) => {
   const item = (

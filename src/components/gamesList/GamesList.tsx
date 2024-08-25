@@ -9,6 +9,7 @@ import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
 import { useGetFilteredGamesQuery } from '../../api/apiSlice';
 import './gamesList.scss';
+import { IGamesList } from '../../types/types';
 
 const GamesList = () => {
   const { platform, category, sort, inputSearch } = useAppSelector(
@@ -27,49 +28,17 @@ const GamesList = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  const filterGames = (searchText: string, listOfGames: any) => {
+  const filterGames = (searchText: string, listOfGames: IGamesList[]) => {
     if (!searchText) {
       return listOfGames;
     }
 
-    return listOfGames.filter(({ title }: any) =>
+    return listOfGames.filter(({ title }) =>
       title.toLowerCase().startsWith(searchText.toLowerCase())
     );
   };
 
-  const renderItems = (filteredGame: any) => {
-    const item = filteredGame.map((item: any) => {
-      const { id, title, thumbnail, genre, short_description, platform } = item;
-      const gif =
-        platform === 'PC (Windows), Web Browser' ||
-        platform === 'Web Browser' ? (
-          <TbBrowser />
-        ) : (
-          <DiWindows />
-        );
-      return (
-        <li className="gamelist__item" key={id}>
-          <div className="gamelist__img-cont">
-            <img src={thumbnail} alt={title} className="gamelist__img" />
-          </div>
-
-          <Link className="gamelist__link" to={`/game/${id}`}>
-            <h3 className="gamelist__title">{title}</h3>
-          </Link>
-
-          <p className="gamelist__desc">{short_description}</p>
-          <div className="gamelist__genre">
-            {genre}
-            {gif}
-          </div>
-        </li>
-      );
-    });
-
-    return item;
-  };
-
-  const content = renderItems(
+  const content = renderItemsView(
     Array.isArray(filteredGame) ? filterGames(inputSearch, filteredGame) : []
   );
 
@@ -96,6 +65,37 @@ const GamesList = () => {
       </div>
     </section>
   );
+};
+
+const renderItemsView = (filteredGame: IGamesList[]) => {
+  const item = filteredGame.map((item) => {
+    const { id, title, thumbnail, genre, short_description, platform } = item;
+    const gif =
+      platform === 'PC (Windows), Web Browser' || platform === 'Web Browser' ? (
+        <TbBrowser />
+      ) : (
+        <DiWindows />
+      );
+    return (
+      <li className="gamelist__item" key={id}>
+        <div className="gamelist__img-cont">
+          <img src={thumbnail} alt={title} className="gamelist__img" />
+        </div>
+
+        <Link className="gamelist__link" to={`/game/${id}`}>
+          <h3 className="gamelist__title">{title}</h3>
+        </Link>
+
+        <p className="gamelist__desc">{short_description}</p>
+        <div className="gamelist__genre">
+          {genre}
+          {gif}
+        </div>
+      </li>
+    );
+  });
+
+  return item;
 };
 
 export default GamesList;

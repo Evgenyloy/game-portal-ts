@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { CSSTransition } from 'react-transition-group';
-import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 import { useParams } from 'react-router-dom';
-
 import ErrorMessage from '../errorMessage/ErrorMessage';
 import Spinner from '../spinner/Spinner';
 import OneGameRequirements from './OneGameRequirements';
@@ -25,7 +23,6 @@ const OneGame = () => {
 
   const [popUp, setPopUp] = useState(false);
   const [popUpImgSrc, setPopUpImgSrc] = useState('');
-  /*  const [screenShotsVisibility, setScreenShotsVisibility] = useState(false); */
 
   useEffect(() => {
     document.documentElement.scrollTop = 0;
@@ -45,23 +42,12 @@ const OneGame = () => {
 
   const createMarkup = () => {
     if (selectedGame === undefined) return;
-
     return { __html: selectedGame.description };
   };
 
-  /* let inlineStyle = screenShotsVisibility
-    ? document.querySelector('.screenshots-block')?.scrollHeight + 'px'
-    : '0'; */
-
-  /*  const onScreenShotClick = () => {
-    setScreenShotsVisibility(!screenShotsVisibility);
-  };
-
-  let Icon = screenShotsVisibility ? FiChevronUp : FiChevronDown; */
-
   const nodeRef = useRef(null);
 
-  const renderGame = (selectedGame: IGame) => {
+  const renderGameView = (selectedGame: IGame) => {
     if (selectedGame === undefined) return;
 
     let clazz =
@@ -94,17 +80,8 @@ const OneGame = () => {
                     className="game__img main-img"
                   />
                 </div>
-                <div className={clazz} /* onClick={onScreenShotClick} */>
-                  screenshots
-                  <span>{/* <Icon /> */}</span>
-                </div>
-                <div
-                  className="screenshots-block"
-                  /* style={{
-                    height: inlineStyle,
-                    opacity: screenShotsVisibility ? '1' : '0',
-                  }} */
-                >
+                <div className={clazz}>screenshots</div>
+                <div className="screenshots-block">
                   <OneGameScreenshots
                     selectedGame={selectedGame}
                     handleScreenshotClick={handleScreenshotClick}
@@ -127,7 +104,7 @@ const OneGame = () => {
     return content;
   };
 
-  const content = renderGame(selectedGame as IGame);
+  const content = renderGameView(selectedGame as IGame);
   const className = isLoading || isError ? 'game__spinner' : 'game';
 
   return (

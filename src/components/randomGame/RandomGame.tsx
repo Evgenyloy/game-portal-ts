@@ -4,12 +4,12 @@ import ErrorMessage from '../errorMessage/ErrorMessage';
 import Spinner from '../spinner/Spinner';
 
 import { useGetCategoryQuery } from '../../api/apiSlice';
+import { useMemo, useRef } from 'react';
+import { IGamesList, TNodeRef } from '../../types/types';
 import './randomGame.scss';
-import { useRef } from 'react';
-import { IGamesList } from '../../types/types';
 
 const RandomGame = () => {
-  const genre = () => {
+  const genre = useMemo(() => {
     let randomGenre = 'mmo';
     const randomCategory = Math.floor(Math.random() * 4) + 1;
 
@@ -31,14 +31,14 @@ const RandomGame = () => {
         randomGenre = 'mmo';
     }
     return randomGenre;
-  };
+  }, []);
 
   const {
     data: games = [],
     isError,
     isLoading,
     isSuccess,
-  } = useGetCategoryQuery(genre());
+  } = useGetCategoryQuery(genre);
 
   const nodeRef = useRef(null);
   const content = renderItemsView(games.slice(0, 8), nodeRef);
@@ -55,10 +55,7 @@ const RandomGame = () => {
   );
 };
 
-const renderItemsView = (
-  games: IGamesList[],
-  nodeRef: React.MutableRefObject<null>
-) => {
+const renderItemsView = (games: IGamesList[], nodeRef: TNodeRef) => {
   const item = (
     <CSSTransition
       classNames="transition"

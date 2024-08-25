@@ -1,4 +1,8 @@
-import { ITagsData, TTagsListData } from './dataTypes';
+export type TTagsListData = string[];
+export interface ITagsData {
+  name: string;
+  data: string;
+}
 
 const tagListData: TTagsListData = [
   'mmorpg',

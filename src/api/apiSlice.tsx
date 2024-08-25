@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { IGame, IGamesList, INews } from '../types/types';
+import { IFilteredGamesArgs, IGame, IGamesList, INews } from '../types/types';
 
 export const apiSlice = createApi({
   reducerPath: 'api',
@@ -52,9 +52,3 @@ export const {
   useGetOneGameQuery,
   useGetFilteredGamesQuery,
 } = apiSlice;
-
-interface IFilteredGamesArgs {
-  platform: string;
-  category: string;
-  sort: string;
-}

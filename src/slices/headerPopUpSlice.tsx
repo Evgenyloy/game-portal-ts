@@ -9,9 +9,8 @@ const popUpSlice = createSlice({
   name: 'hederPopUp',
   initialState,
   reducers: {
-    changePopUp: (state /*  action: PayloadAction<boolean> */) => {
-      state.popUpVisible =
-        /* action.payload === false ? false : */ !state.popUpVisible;
+    changePopUp: (state) => {
+      state.popUpVisible = !state.popUpVisible;
     },
   },
 });

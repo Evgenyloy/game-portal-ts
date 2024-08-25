@@ -1,14 +1,13 @@
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { tagsData } from '../../data/data';
+import { tagsData, ITagsData } from '../../data/data';
 import {
   categorySelected,
   platformSelected,
 } from '../../slices/headerFiltersSlice';
 import { changePopUp } from '../../slices/headerPopUpSlice';
-import { ITagsData } from '../../data/dataTypes';
 import HeaderPopUp from '../headerPopUp/HeaderPopUp';
-
+import { TClickLinkEvent } from '../../types/types';
 import './header.scss';
 
 const Header = () => {
@@ -19,19 +18,15 @@ const Header = () => {
   );
 
   const handleBurgerClick = () => {
-    dispatch(changePopUp(/* true */));
+    dispatch(changePopUp());
   };
 
-  const handleMainLinkClick = (
-    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
-  ) => {
+  const handleMainLinkClick = (e: TClickLinkEvent) => {
     if (platform === e.currentTarget.dataset.link) return;
     dispatch(platformSelected(e.currentTarget.dataset.link as string));
   };
 
-  const handleTagClick = (
-    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
-  ) => {
+  const handleTagClick = (e: TClickLinkEvent) => {
     if (!(e.target instanceof HTMLAnchorElement)) return;
     dispatch(categorySelected(e.target.dataset.link as string));
   };
@@ -77,7 +72,7 @@ const Header = () => {
               about
             </Link>
           </nav>
-          <div className={burgerClassName} onClick={(e) => handleBurgerClick()}>
+          <div className={burgerClassName} onClick={handleBurgerClick}>
             <span className="burger__line"></span>
             <span className="burger__line"></span>
             <span className="burger__line"></span>
@@ -99,7 +94,7 @@ const Header = () => {
 
 const tagsRenderView = (
   tagsData: ITagsData[],
-  handleTagClick: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void
+  handleTagClick: (e: TClickLinkEvent) => void
 ) => {
   const item = tagsData.map(({ name, data }) => {
     return (

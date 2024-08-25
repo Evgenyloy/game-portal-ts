@@ -34,12 +34,14 @@ const OneGamePopUp: FC<IOneGamePopUpProps> = ({
           <span>
             <ImCross onClick={closePopUp} />
           </span>
-          <img
-            className="pop-up__img"
-            src={popUpImgSrc}
-            alt=""
-            onClick={(e) => e.stopPropagation()}
-          />
+          <div className="pop-up__img-cont">
+            <img
+              className="pop-up__img"
+              src={popUpImgSrc}
+              alt=""
+              onClick={(e) => e.stopPropagation()}
+            />
+          </div>
         </div>
       }
     </CSSTransition>

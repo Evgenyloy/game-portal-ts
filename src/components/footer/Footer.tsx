@@ -3,6 +3,7 @@ import { platformSelected } from '../../slices/headerFiltersSlice';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 
 import './footer.scss';
+import { TClickLinkEvent } from '../../types/types';
 
 const Footer = () => {
   const platform = useAppSelector((state) => state.filters.platform);
@@ -16,9 +17,7 @@ const Footer = () => {
     });
   };
 
-  const onMainLinkClick = (
-    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
-  ) => {
+  const onMainLinkClick = (e: TClickLinkEvent) => {
     onBtnUpClick();
     if (platform === e.currentTarget.dataset.link) return;
     dispatch(platformSelected(e.currentTarget.dataset.link as string));
