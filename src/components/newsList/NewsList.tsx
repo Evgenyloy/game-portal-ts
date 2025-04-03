@@ -1,34 +1,32 @@
-import { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
-import { BsFillArrowUpCircleFill } from 'react-icons/bs';
-import { CSSTransition } from 'react-transition-group';
-import { useAppDispatch } from '../../hooks/hooks';
-
-import { selectNews } from '../../slices/newsSlice';
-import Spinner from '../spinner/Spinner';
-import ErrorMessage from '../errorMessage/ErrorMessage';
-import RandomGame from '../randomGame/RandomGame';
-import { useGetNewsListQuery } from '../../api/apiSlice';
-import { INews, TNodeRef } from '../../types/types';
-import './newsList.scss';
+import { useRef, useMemo } from "react";
+import Spinner from "../spinner/Spinner";
+import ErrorMessage from "../errorMessage/ErrorMessage";
+import RandomGame from "../randomGame/RandomGame";
+import { INews } from "../../types/types";
+import NewsListItem from "./NewsListItem";
+import ScrollUpButton from "./ScrollUpButton";
+import { newsStore } from "../../store/newsStore";
+import { useGetNewsList } from "../../hooks/gamesQueries";
+import { useInfinityScroll } from "./useInfinityScroll";
+import "./newsList.scss";
 
 const NewsList = () => {
   const {
-    data: news = [],
-    isLoading,
+    data: news = [] as INews[],
+    isPending,
     isError,
     isSuccess,
-  } = useGetNewsListQuery();
+  } = useGetNewsList();
 
-  const dispatch = useAppDispatch();
+  const setNews = newsStore.use.setNews();
 
-  const [itemPerPage, setItemPerPage] = useState(10);
-  const [scrollUp, setScrollUp] = useState(false);
-  let newsListCopy;
+  const newsListRef = useRef<HTMLUListElement>(null);
 
-  const onNewsLoading = (news: INews[]) => {
+  let newsListCopy: INews[] = [];
+
+  const onNewsLoading = (news: INews[]): INews[] => {
     const filteredNews = news.filter(
-      (news) => !news.article_content.includes('&lt')
+      (item) => !item.article_content.includes("&lt")
     );
     const newsList = filteredNews.slice(0, itemPerPage);
 
@@ -36,122 +34,38 @@ const NewsList = () => {
     return newsList;
   };
 
-  const scrollHandler = () => {
-    const scrollHeight = document.documentElement.scrollHeight;
-    const scrollTop = document.documentElement.scrollTop;
-    const innerHeight = window.innerHeight;
-
-    if (
-      scrollHeight - (scrollTop + innerHeight) < 150 &&
-      newsListCopy.length < 45
-    ) {
-      setItemPerPage(itemPerPage + 10);
-    }
-  };
-
-  const scrollUpHandler = () => {
-    const scrollY = window.scrollY;
-    scrollY > 700 ? setScrollUp(true) : setScrollUp(false);
-  };
-
-  useEffect(() => {
-    document.addEventListener('scroll', scrollHandler);
-    window.addEventListener('scroll', scrollUpHandler);
-    return () => {
-      document.removeEventListener('scroll', scrollHandler);
-      window.removeEventListener('scroll', scrollUpHandler);
-    };
-  });
-
-  const onBtnUpClick = () => {
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: 'smooth',
-    });
-  };
+  const { itemPerPage } = useInfinityScroll(newsListCopy);
 
   const onNewsClick = (oneNews: INews) => {
-    localStorage.setItem('news', JSON.stringify(oneNews));
-    dispatch(selectNews(oneNews));
+    localStorage.setItem("news", JSON.stringify(oneNews));
+    setNews(oneNews);
   };
 
-  const nodeRef = useRef(null);
-  const items = renderItemsView(onNewsLoading(news), nodeRef, onNewsClick);
+  const items = NewsListItem(onNewsLoading(news), newsListRef, onNewsClick);
   const className =
-    isLoading || isError ? 'news-list__spinner ' : 'news-list__inner';
-  const btnUpClassName = scrollUp ? 'btn-up' : 'btn-up btn-up_hide';
+    isPending || isError ? "news-list__spinner" : "news-list__inner";
+
+  const randomGameMemo = useMemo(() => <RandomGame />, []);
 
   return (
     <section className="news-list">
       <div className="container">
         <div className="news-list__wrapper">
           <div className="news-list__col-1">
-            <ul className={className} ref={nodeRef}>
-              {isLoading && <Spinner />}
+            <ul className={className} ref={newsListRef}>
+              {isPending && <Spinner />}
               {isError && <ErrorMessage />}
               {isSuccess && items}
             </ul>
           </div>
           <div className="news-list__col-2">
-            <div className="container">
-              {' '}
-              <RandomGame />{' '}
-            </div>
+            <div className="container">{randomGameMemo}</div>
           </div>
-          <div className={btnUpClassName} onClick={onBtnUpClick}>
-            <BsFillArrowUpCircleFill />
-          </div>
+          <ScrollUpButton />
         </div>
       </div>
     </section>
   );
-};
-
-const renderItemsView = (
-  news: INews[],
-  nodeRef: TNodeRef,
-  onNewsClick: (oneNews: INews) => void
-) => {
-  const item = (
-    <CSSTransition
-      classNames="transition"
-      nodeRef={nodeRef}
-      in
-      timeout={{
-        appear: 200,
-        enter: 200,
-        exit: 200,
-      }}
-      appear
-    >
-      <>
-        {news.map((item) => {
-          const { short_description, title, thumbnail, id } = item;
-          return (
-            <li className="news-list__item" key={id}>
-              <div className="news-list__img-cont">
-                <img src={thumbnail} alt={title} className="news-list__img" />
-              </div>
-              <div className="news-list__content-cont">
-                <h3 className="news-list__title">{title}</h3>
-                <Link
-                  className="news-list__desc"
-                  to="/news"
-                  onClick={() => onNewsClick(item)}
-                  onContextMenu={() => onNewsClick(item)}
-                >
-                  {short_description}
-                </Link>
-              </div>
-            </li>
-          );
-        })}
-      </>
-    </CSSTransition>
-  );
-
-  return item;
 };
 
 export default NewsList;

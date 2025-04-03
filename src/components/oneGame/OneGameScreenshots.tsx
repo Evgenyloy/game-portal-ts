@@ -1,23 +1,15 @@
-import { FC } from 'react';
-import { IGame } from '../../types/types';
-import SpinnerImg from '../spinner/SpinnerImg';
-import './oneGame.scss';
+import { IGame, IOneGameScreenshotsProps } from "../../types/types";
+import SpinnerImg from "../spinner/SpinnerImg";
+import "./oneGame.scss";
 
-interface IOneGameScreenshotsProps {
-  selectedGame: IGame;
-  handleScreenshotClick: (
-    e: React.MouseEvent<HTMLImageElement, MouseEvent>
-  ) => void;
-}
-
-const OneGameScreenshots: FC<IOneGameScreenshotsProps> = ({
+const OneGameScreenshots = ({
   selectedGame,
   handleScreenshotClick,
-}) => {
+}: IOneGameScreenshotsProps) => {
   const onload = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
     if (!(e.target instanceof HTMLImageElement)) return;
     if (e?.target?.complete) {
-      e.target.className = 'game__screenshots';
+      e.target.className = "game__screenshots";
     }
   };
 

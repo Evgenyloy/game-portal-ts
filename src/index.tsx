@@ -1,15 +1,15 @@
-import ReactDOM from 'react-dom/client';
-import App from './components/app/App';
-import { Provider } from 'react-redux';
+import ReactDOM from "react-dom/client";
+import App from "./components/app/App";
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+import "./style/style.scss";
 
-import './style/style.scss';
-import { store } from './store';
+const queryClient = new QueryClient();
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById("root") as HTMLElement
 );
 root.render(
-  <Provider store={store}>
+  <QueryClientProvider client={queryClient}>
     <App />
-  </Provider>
+  </QueryClientProvider>
 );

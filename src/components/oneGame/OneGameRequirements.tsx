@@ -1,12 +1,7 @@
-import { FC } from 'react';
-import { IGame } from '../../types/types';
-import './oneGame.scss';
+import { IOneGameRequirementsProps } from "../../types/types";
+import "./oneGame.scss";
 
-interface IOneGameRequirementsProps {
-  selectedGame: IGame;
-}
-
-const OneGameRequirements: FC<IOneGameRequirementsProps> = (props) => {
+const OneGameRequirements = (props: IOneGameRequirementsProps) => {
   const { minimum_system_requirements } = props.selectedGame;
 
   return props.selectedGame.minimum_system_requirements ? (

@@ -1,57 +1,48 @@
-import { CSSTransition } from 'react-transition-group';
-import { Link } from 'react-router-dom';
-import { useEffect, useState, useRef, useCallback } from 'react';
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { CSSTransition } from "react-transition-group";
+import { useEffect, useState, useRef, useCallback } from "react";
+import { popUpStore } from "../../store/popUpStore";
+import { useHeaderFiltersStore } from "../../store/headerFiltersStore";
+import LinksView from "./LinksView";
+import "./headerPopUp.scss";
 
-import { platformSelected } from '../../slices/headerFiltersSlice';
-import { changePopUp } from '../../slices/headerPopUpSlice';
+const DESKTOP_WIDTH = 650;
 
-import './headerPopUp.scss';
-import { TClickLinkEvent } from '../../types/types';
+function HeaderPopUp() {
+  const { setPlatform } = useHeaderFiltersStore();
+  const popUpVisible = popUpStore.use.popUpVisible();
+  const setPopUp = popUpStore.use.setPopUp();
+  const [windowIsOpen, setWindowIsOpen] = useState(false);
+  const popUpRef = useRef(null);
 
-const HeaderPopUp = () => {
-  const dispatch = useAppDispatch();
-  const popUpVisible = useAppSelector(
-    (state) => state.headerPopUp.popUpVisible
-  );
-
-  const handleLinkClick = (e: TClickLinkEvent) => {
-    if (!(e.target instanceof HTMLAnchorElement)) return;
-    dispatch(platformSelected(e.target.dataset.link as string));
-    dispatch(changePopUp());
-  };
-
-  const changeBodyScroll = useCallback(() => {
-    popUpVisible
-      ? document.body.classList.add('noscroll')
-      : document.body.classList.remove('noscroll');
-  }, [popUpVisible]);
+  const changeBodyScroll = useCallback((isVisible: boolean) => {
+    document.body.classList.toggle("noscroll", isVisible);
+  }, []);
 
   useEffect(() => {
-    changeBodyScroll();
+    changeBodyScroll(popUpVisible);
   }, [popUpVisible, changeBodyScroll]);
 
-  const [windowIsOpen, setWindowIsOpen] = useState(false);
   const closePopup = () => {
-    window.innerWidth >= 650 ? setWindowIsOpen(true) : setWindowIsOpen(false);
+    window.innerWidth >= DESKTOP_WIDTH
+      ? setWindowIsOpen(true)
+      : setWindowIsOpen(false);
   };
 
   useEffect(() => {
-    window.addEventListener('resize', closePopup);
-    return () => window.removeEventListener('resize', closePopup);
+    window.addEventListener("resize", closePopup);
+    return () => window.removeEventListener("resize", closePopup);
   }, []);
 
   useEffect(() => {
     if (!popUpVisible) return;
     if (windowIsOpen) {
-      dispatch(changePopUp());
+      setPopUp();
     }
-  }, [windowIsOpen, popUpVisible, dispatch]);
+  }, [windowIsOpen, popUpVisible]);
 
-  const popUpRef = useRef(null);
-  const popUpLinks = linksRenderView(handleLinkClick);
+  const popUpLinks = LinksView(setPlatform, setPopUp);
   const popUpClass =
-    window.innerWidth >= 650 ? 'popup popup-no-visible' : 'popup';
+    window.innerWidth >= DESKTOP_WIDTH ? "popup popup-no-visible" : "popup";
 
   return (
     <CSSTransition
@@ -70,31 +61,6 @@ const HeaderPopUp = () => {
       </div>
     </CSSTransition>
   );
-};
-
-const linksRenderView = (handleLinkClick: (e: TClickLinkEvent) => void) => {
-  const linksData = [
-    { name: 'pc games', dataAtr: 'pc', linkTo: 'game_list' },
-    { name: ' browser games', dataAtr: 'browser', linkTo: 'game_list' },
-    { name: ' news', dataAtr: 'pc', linkTo: 'news-list' },
-    { name: ' home', dataAtr: 'pc', linkTo: '.' },
-    { name: 'about', dataAtr: 'pc', linkTo: 'about' },
-  ];
-
-  const links = linksData.map(({ name, dataAtr, linkTo }) => {
-    return (
-      <Link
-        key={name}
-        to={linkTo}
-        className="popup__link"
-        data-link={dataAtr}
-        onClick={handleLinkClick}
-      >
-        {name}
-      </Link>
-    );
-  });
-  return links;
-};
+}
 
 export default HeaderPopUp;

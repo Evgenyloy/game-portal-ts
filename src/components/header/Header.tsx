@@ -1,38 +1,27 @@
-import { Link } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { tagsData, ITagsData } from '../../data/data';
-import {
-  categorySelected,
-  platformSelected,
-} from '../../slices/headerFiltersSlice';
-import { changePopUp } from '../../slices/headerPopUpSlice';
-import HeaderPopUp from '../headerPopUp/HeaderPopUp';
-import { TClickLinkEvent } from '../../types/types';
-import './header.scss';
+import { Link } from "react-router-dom";
+import HeaderPopUp from "../headerPopUp/HeaderPopUp";
+import { TClickLinkEvent } from "../../types/types";
+import { useHeaderFiltersStore } from "../../store/headerFiltersStore";
+import { popUpStore } from "../../store/popUpStore";
+import { TAGS_DATA } from "./data";
+import TagsView from "./TagsView";
+import "./header.scss";
 
-const Header = () => {
-  const dispatch = useAppDispatch();
-  const platform = useAppSelector((state) => state.filters.platform);
-  const popupVisible = useAppSelector(
-    (state) => state.headerPopUp.popUpVisible
-  );
+function Header() {
+  const { platform, setCategory, setPlatform } = useHeaderFiltersStore();
+  const popupVisible = popUpStore.use.popUpVisible();
+  const setPopUp = popUpStore.use.setPopUp();
 
   const handleBurgerClick = () => {
-    dispatch(changePopUp());
+    setPopUp();
   };
 
   const handleMainLinkClick = (e: TClickLinkEvent) => {
     if (platform === e.currentTarget.dataset.link) return;
-    dispatch(platformSelected(e.currentTarget.dataset.link as string));
+    setPlatform(e.currentTarget.dataset.link as string);
   };
 
-  const handleTagClick = (e: TClickLinkEvent) => {
-    if (!(e.target instanceof HTMLAnchorElement)) return;
-    dispatch(categorySelected(e.target.dataset.link as string));
-  };
-
-  const burgerClassName = popupVisible ? 'burger active' : 'burger';
-  const tagList = tagsRenderView(tagsData, handleTagClick);
+  const tagList = TagsView(TAGS_DATA, setCategory);
 
   return (
     <header className="header">
@@ -50,7 +39,7 @@ const Header = () => {
           </Link>
           <nav className="header__nav">
             <Link
-              to="game_list"
+              to="game-list"
               className="header__link"
               onClick={handleMainLinkClick}
               data-link="pc"
@@ -58,7 +47,7 @@ const Header = () => {
               PC games
             </Link>
             <Link
-              to="game_list"
+              to="game-list"
               className="header__link"
               onClick={handleMainLinkClick}
               data-link="browser"
@@ -72,7 +61,10 @@ const Header = () => {
               about
             </Link>
           </nav>
-          <div className={burgerClassName} onClick={handleBurgerClick}>
+          <div
+            className={popupVisible ? "burger active" : "burger"}
+            onClick={handleBurgerClick}
+          >
             <span className="burger__line"></span>
             <span className="burger__line"></span>
             <span className="burger__line"></span>
@@ -90,27 +82,6 @@ const Header = () => {
       <HeaderPopUp />
     </header>
   );
-};
-
-const tagsRenderView = (
-  tagsData: ITagsData[],
-  handleTagClick: (e: TClickLinkEvent) => void
-) => {
-  const item = tagsData.map(({ name, data }) => {
-    return (
-      <li className="sub-menu__item" key={name}>
-        <Link
-          to="game_list"
-          className="sub-menu__link"
-          data-link={data}
-          onClick={handleTagClick}
-        >
-          {name}
-        </Link>
-      </li>
-    );
-  });
-  return item;
-};
+}
 
 export default Header;

@@ -1,8 +1,3 @@
-import { store } from '../store';
-
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
-
 export interface IInitialFiltersState {
   platform: string;
   category: string;
@@ -74,3 +69,44 @@ export interface IFilteredGamesArgs {
 export type TNodeRef = React.MutableRefObject<null>;
 export type TMouseEvent = React.MouseEvent<HTMLElement, MouseEvent>;
 export type TClickLinkEvent = React.MouseEvent<HTMLAnchorElement, MouseEvent>;
+
+export type dropdownItem = {
+  name: string;
+  dataAtr: string;
+  id: string;
+};
+
+export type TTagsListData = string[];
+
+export interface ITagsData {
+  name: string;
+  data: string;
+}
+
+export interface IOneGameScreenshotsProps {
+  selectedGame: IGame;
+  handleScreenshotClick: (
+    e: React.MouseEvent<HTMLImageElement, MouseEvent>
+  ) => void;
+}
+
+export interface IOneGamePopUpProps {
+  popUpImgSrc: string;
+  popUp: boolean;
+  closePopUp: () => void;
+}
+
+export interface IOneGameInfoProps {
+  selectedGame: IGame;
+}
+
+export interface IRenderGameViewProps {
+  selectedGame: IGame;
+  handleScreenshotClick: (
+    e: React.MouseEvent<HTMLImageElement, MouseEvent>
+  ) => void;
+}
+
+export interface IOneGameRequirementsProps {
+  selectedGame: IGame;
+}

@@ -1,27 +1,31 @@
-import { Link } from 'react-router-dom';
-import { platformSelected } from '../../slices/headerFiltersSlice';
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-
-import './footer.scss';
-import { TClickLinkEvent } from '../../types/types';
+import { Link } from "react-router-dom";
+import { TClickLinkEvent } from "../../types/types";
+import { useHeaderFiltersStore } from "../../store/headerFiltersStore";
+import { useShallow } from "zustand/react/shallow";
+import "./footer.scss";
 
 const Footer = () => {
-  const platform = useAppSelector((state) => state.filters.platform);
-  const dispatch = useAppDispatch();
+  const { platform, setPlatform } = useHeaderFiltersStore(
+    useShallow((state) => ({
+      platform: state.platform,
+      setPlatform: state.setPlatform,
+    }))
+  );
 
   const onBtnUpClick = () => {
     window.scrollTo({
       top: 0,
       left: 0,
-      behavior: 'auto',
+      behavior: "auto",
     });
   };
 
   const onMainLinkClick = (e: TClickLinkEvent) => {
     onBtnUpClick();
     if (platform === e.currentTarget.dataset.link) return;
-    dispatch(platformSelected(e.currentTarget.dataset.link as string));
+    setPlatform(e.currentTarget.dataset.link as string);
   };
+
   return (
     <footer className="footer">
       <div className="footer__inner">

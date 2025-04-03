@@ -1,19 +1,14 @@
-import { CSSTransition } from 'react-transition-group';
-import { ImCross } from 'react-icons/im';
-import { FC, useRef } from 'react';
-import './oneGame.scss';
+import { CSSTransition } from "react-transition-group";
+import { ImCross } from "react-icons/im";
+import { useRef } from "react";
+import { IOneGamePopUpProps } from "../../types/types";
+import "./oneGame.scss";
 
-interface IOneGamePopUpProps {
-  popUpImgSrc: string;
-  popUp: boolean;
-  closePopUp: () => void;
-}
-
-const OneGamePopUp: FC<IOneGamePopUpProps> = ({
+const OneGamePopUp = ({
   popUpImgSrc,
   popUp,
   closePopUp,
-}) => {
+}: IOneGamePopUpProps) => {
   const nodeRef = useRef(null);
 
   return (

@@ -92,11 +92,12 @@
     }
     img {
       display: block;
-      width: 450px;
-      height: 270px;
-      object-fit: cover;
+      max-width: 300px;
+      height: 200px;
+      //object-fit: cover;
       margin: 0 auto;
     }
+    
   }
   &__button {
     &:focus-within {
@@ -104,6 +105,11 @@
     }
   }
 }
+
+.transition-enter-active, .transition-appear-active {
+  transition: opacity 200ms ease-out;
+}
+
 
 @media (max-width: 880px) {
   .mmo {

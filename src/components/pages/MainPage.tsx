@@ -1,6 +1,6 @@
-import NewsBlock from '../newsBlock/NewsBlock';
-import ExploreMmo from '../exploreMoo/exploreMoo';
-import NewsList from '../newsList/NewsList';
+import NewsBlock from "../newsBlock/NewsBlock";
+import ExploreMmo from "../exploreMoo/ExploreMoo";
+import NewsList from "../newsList/NewsList";
 
 const MainPage = () => {
   return (

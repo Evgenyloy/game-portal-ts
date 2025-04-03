@@ -1,12 +1,7 @@
-import { FC } from 'react';
-import { IGame } from '../../types/types';
-import './oneGame.scss';
+import { IOneGameInfoProps } from "../../types/types";
+import "./oneGame.scss";
 
-interface IOneGameInfoProps {
-  selectedGame: IGame;
-}
-
-const OneGameInfo: FC<IOneGameInfoProps> = (props) => {
+const OneGameInfo = (props: IOneGameInfoProps) => {
   const { developer, genre, platform, publisher, release_date } =
     props.selectedGame;
 

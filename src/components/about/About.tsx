@@ -1,4 +1,4 @@
-import './about.scss';
+import "./about.scss";
 
 const About = () => {
   return (
@@ -6,18 +6,18 @@ const About = () => {
       <div className="about__inner">
         <h1 className="about__title">React educational project</h1>
         <p className="about__item">
-          gitHub:{' '}
+          GitHub:{" "}
           <a
             className="about__link"
             href="https://github.com/Evgenyloy/gamePortal"
             target="_blank"
             rel="noreferrer"
           >
-            gamePortal
+            Game Portal
           </a>
         </p>
         <p className="about__item">
-          api:{' '}
+          API:{" "}
           <a
             className="about__link"
             href="https://rapidapi.com/digiwalls/api/mmo-games"
@@ -28,8 +28,11 @@ const About = () => {
           </a>
         </p>
         <p className="about__item">
-          additional libraries:{' '}
-          <span> redux, react router 6, RTK Query, react transition group</span>
+          Additional libraries:{" "}
+          <span>
+            {" "}
+            Zustand, TanStack Query, React Router 6, React Transition Group
+          </span>
         </p>
       </div>
     </div>
