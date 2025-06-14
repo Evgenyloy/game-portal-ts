@@ -38,7 +38,7 @@ function GamesList() {
         <ul className={className}>
           {isLoading && <Spinner />}
           {isError && <ErrorMessage />}
-          {error || (content.length === 0 && isSuccess) ? (
+          {content.length === 0 && isSuccess ? (
             <div className="gamelist__filterError">
               There are no games that match these filters
             </div>

@@ -30,9 +30,11 @@
     border-radius: 4px;
     background-color: white;
     transition: all 0.1s linear;
+
     &:hover {
       box-shadow: 4px 4px 8px 0px rgba(51, 47, 49, 0.3);
     }
+
     &:focus-within {
       outline: 2px solid orange;
     }
@@ -43,6 +45,7 @@
     height: 150px;
     background-color: rgba(138, 138, 138, 0.569);
   }
+
   &__img {
     position: absolute;
     top: 0;
@@ -53,12 +56,14 @@
     color: transparent;
     font-size: 0;
   }
+
   &__desc-inner {
     padding: 13px 15px;
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
+
   &__desc {
     font-weight: 450;
     display: inline-block;
@@ -66,10 +71,12 @@
     text-align: center;
 
     color: #8e8c84;
+
     &::first-letter {
       text-transform: uppercase;
     }
   }
+
   &__free {
     font-weight: 600;
     color: #fff;
@@ -80,16 +87,19 @@
     border-radius: 5px;
     letter-spacing: 0.5px;
   }
+
   &__spinner {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 196.63px;
+
     .mmo__error-message {
       text-align: center;
       font-size: 18px;
       color: #3e3f3a;
     }
+
     img {
       display: block;
       max-width: 300px;
@@ -97,8 +107,9 @@
       //object-fit: cover;
       margin: 0 auto;
     }
-    
+
   }
+
   &__button {
     &:focus-within {
       outline: 2px solid orange;
@@ -106,7 +117,8 @@
   }
 }
 
-.transition-enter-active, .transition-appear-active {
+.transition-enter-active,
+.transition-appear-active {
   transition: opacity 200ms ease-out;
 }
 
@@ -114,6 +126,7 @@
 @media (max-width: 880px) {
   .mmo {
     padding: 30px 0;
+
     &__inner {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -122,23 +135,43 @@
     &__top-side {
       margin-bottom: 10px;
     }
+
     &__spinner {
       height: 400px;
     }
   }
 }
+
 @media (max-width: 460px) {
   .mmo {
     padding: 20px 0;
+
     &__inner {
       display: grid;
       grid-template-columns: repeat(1, 1fr);
     }
+
     &__top-side {
       margin-bottom: 10px;
     }
+
     &__spinner {
       height: 810px;
     }
   }
+}
+
+.explore-mmo__error {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 18px;
+  color: #3e3f3a;
+  text-align: center;
+
+}
+
+.explore-mmo__error-text-1 {
+  margin-bottom: 13px;
+  font-weight: 600;
 }

@@ -8,7 +8,8 @@ import TagsView from "./TagsView";
 import "./header.scss";
 
 function Header() {
-  const { platform, setCategory, setPlatform } = useHeaderFiltersStore();
+  const { platform, setCategory, setPlatform, setInput } =
+    useHeaderFiltersStore();
   const popupVisible = popUpStore.use.popUpVisible();
   const setPopUp = popUpStore.use.setPopUp();
 
@@ -19,6 +20,7 @@ function Header() {
   const handleMainLinkClick = (e: TClickLinkEvent) => {
     if (platform === e.currentTarget.dataset.link) return;
     setPlatform(e.currentTarget.dataset.link as string);
+    setInput("");
   };
 
   const tagList = TagsView(TAGS_DATA, setCategory);
@@ -54,10 +56,19 @@ function Header() {
             >
               browser games
             </Link>
-            <Link to="news-list" className="header__link" data-link="news">
+            <Link
+              to="news-list"
+              className="header__link"
+              data-link="news"
+              onClick={() => setInput("")}
+            >
               news
             </Link>
-            <Link to="about" className="header__link">
+            <Link
+              to="about"
+              className="header__link"
+              onClick={() => setInput("")}
+            >
               about
             </Link>
           </nav>

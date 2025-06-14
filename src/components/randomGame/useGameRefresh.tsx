@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import { GameGenre,getNewGenre } from "./utils"; 
+import { GameGenre, getNewGenre } from "./utils";
 
 export const useGameRefresh = (
   refetch: () => void,

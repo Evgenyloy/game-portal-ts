@@ -10,6 +10,7 @@ export type GameGenre = (typeof GENRES)[number];
 
 export const getNewGenre = (genreHistory: GameGenre[]): GameGenre => {
   const lastGenre = genreHistory[genreHistory.length - 1];
+
   const availableGenres = lastGenre
     ? GENRES.filter((g) => g !== lastGenre)
     : [...GENRES];

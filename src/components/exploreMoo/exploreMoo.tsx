@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { useRef } from "react";
 import Spinner from "../spinner/Spinner";
-import ErrorMessage from "../errorMessage/ErrorMessage";
 import { useGetMmoGame } from "../../hooks/gamesQueries";
 import MmoItemsView from "./MmoItemsView";
 import { randomGames } from "./utils";
@@ -29,6 +28,17 @@ function ExploreMmo() {
         </div>
       </div>
     </section>
+  );
+}
+
+function ErrorMessage() {
+  return (
+    <div className="explore-mmo__error">
+      <span className="explore-mmo__error-text-1">Something Went Wrong!</span>
+      <span className="explore-mmo__error-text">
+        Please refresh page to load data
+      </span>
+    </div>
   );
 }
 
