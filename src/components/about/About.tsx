@@ -4,7 +4,7 @@ const About = () => {
   return (
     <div className="about">
       <div className="about__inner">
-        <h1 className="about__title">React educational project</h1>
+        <h1 className="about__title">React portfolio project</h1>
         <p className="about__item">
           GitHub:{" "}
           <a
