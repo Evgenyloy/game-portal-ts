@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useHeaderFiltersStore } from "../../store/headerFiltersStore";
 import Filter from "../filter/Filter";
 import Spinner from "../spinner/Spinner";
-import ErrorMessage from "../errorMessage/ErrorMessage";
+import { ErrorMessage } from "../errorMessage/ErrorMessage";
 import { useGetFilteredGames } from "../../hooks/gamesQueries";
 import GamesView from "./GamesView";
 import { filterGames } from "./utils";
@@ -38,13 +38,13 @@ function GamesList() {
         <ul className={className}>
           {isLoading && <Spinner />}
           {isError && <ErrorMessage />}
-          {content.length === 0 && isSuccess ? (
+          {content?.length === 0 && isSuccess ? (
             <div className="gamelist__filterError">
               There are no games that match these filters
             </div>
           ) : null}
 
-          {isSuccess && Array.isArray(filteredGame) ? content : null}
+          {isSuccess && content?.length > 0 ? content : null}
         </ul>
       </div>
     </section>

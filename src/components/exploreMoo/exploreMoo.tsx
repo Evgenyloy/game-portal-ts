@@ -4,6 +4,7 @@ import Spinner from "../spinner/Spinner";
 import { useGetMmoGame } from "../../hooks/gamesQueries";
 import MmoItemsView from "./MmoItemsView";
 import { randomGames } from "./utils";
+import { ErrorMessageSmall } from "../errorMessage/ErrorMessage";
 import "../exploreMoo/exploreMoo.scss";
 
 function ExploreMmo() {
@@ -23,22 +24,11 @@ function ExploreMmo() {
         </div>
         <div className={className} ref={nodeRef}>
           {isPending && <Spinner />}
-          {isError && <ErrorMessage />}
+          {isError && <ErrorMessageSmall />}
           {isSuccess && items}
         </div>
       </div>
     </section>
-  );
-}
-
-function ErrorMessage() {
-  return (
-    <div className="explore-mmo__error">
-      <span className="explore-mmo__error-text-1">Something Went Wrong!</span>
-      <span className="explore-mmo__error-text">
-        Please refresh page to load data
-      </span>
-    </div>
   );
 }
 

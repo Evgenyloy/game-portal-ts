@@ -1,6 +1,6 @@
 import { useRef, useMemo } from "react";
 import Spinner from "../spinner/Spinner";
-import ErrorMessage from "../errorMessage/ErrorMessage";
+import { ErrorMessageSmall } from "../errorMessage/ErrorMessage";
 import RandomGame from "../randomGame/RandomGame";
 import { INews } from "../../types/types";
 import NewsListItem from "./NewsListItem";
@@ -54,7 +54,7 @@ const NewsList = () => {
           <div className="news-list__col-1">
             <ul className={className} ref={newsListRef}>
               {isPending && <Spinner />}
-              {isError && <ErrorMessage />}
+              {isError && <ErrorMessageSmall />}
               {isSuccess && items}
             </ul>
           </div>

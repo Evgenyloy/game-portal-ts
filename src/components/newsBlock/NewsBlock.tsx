@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef } from "react";
-import ErrorMessage from "../errorMessage/ErrorMessage";
+import { ErrorMessage } from "../errorMessage/ErrorMessage";
 import Spinner from "../spinner/Spinner";
 import { newsStore } from "../../store/newsStore";
 import { useGetNewsList } from "../../hooks/gamesQueries";

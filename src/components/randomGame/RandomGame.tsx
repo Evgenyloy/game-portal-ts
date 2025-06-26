@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import ErrorMessage from "../errorMessage/ErrorMessage";
+import { ErrorMessageSmall } from "../errorMessage/ErrorMessage";
 import Spinner from "../spinner/Spinner";
 import { useGetGamesByCategory } from "../../hooks/gamesQueries";
 import RandomGameView from "./RandomGameView";
@@ -48,9 +48,13 @@ function RandomGame() {
         </button>
       </div>
 
-      <div className="random-game__content-wrapper">
+      <div
+        className={`random-game__content-wrapper ${
+          isError ? "random-game__content-wrapper--error" : ""
+        }`}
+      >
         {isPending && <Spinner />}
-        {isError && <ErrorMessage />}
+        {isError && <ErrorMessageSmall />}
         {isSuccess && (
           <>
             {games.length === 0 ? (

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import ErrorMessage from "../errorMessage/ErrorMessage";
+import { ErrorMessage } from "../errorMessage/ErrorMessage";
 import Spinner from "../spinner/Spinner";
 import OneGamePopUp from "./OneGamePopUp";
 import RenderGameView from "./RenderGameView";

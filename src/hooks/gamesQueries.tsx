@@ -6,7 +6,7 @@ import {
   getGamesByCategory,
   getMmoGames,
 } from "../api/gamesApi";
-import { IFilteredGamesArgs, IGamesList } from "../types/types";
+import { IFilteredGamesArgs } from "../types/types";
 
 export const useGetNewsList = () => {
   return useQuery({
