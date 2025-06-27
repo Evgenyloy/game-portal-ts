@@ -1,17 +1,20 @@
 import { Link } from "react-router-dom";
 import { useRef } from "react";
+import clsx from "clsx";
 import Spinner from "../spinner/Spinner";
 import { useGetMmoGame } from "../../hooks/gamesQueries";
 import MmoItemsView from "./MmoItemsView";
-import { randomGames } from "./utils";
 import { ErrorMessageSmall } from "../errorMessage/ErrorMessage";
 import "../exploreMoo/exploreMoo.scss";
 
 function ExploreMmo() {
   const { data: mmoList = [], isError, isSuccess, isPending } = useGetMmoGame();
   const nodeRef = useRef(null);
-  const items = MmoItemsView(randomGames(mmoList), nodeRef);
-  const className = isPending || isError ? "mmo__spinner" : "mmo__inner";
+
+  const containerClasses = clsx({
+    "mmo__main-content": isSuccess,
+    "mmo__loading-state": isPending || isError,
+  });
 
   return (
     <section className="mmo">
@@ -22,10 +25,10 @@ function ExploreMmo() {
             <Link to="/game-list">browse all </Link>
           </div>
         </div>
-        <div className={className} ref={nodeRef}>
+        <div className={containerClasses} ref={nodeRef}>
           {isPending && <Spinner />}
           {isError && <ErrorMessageSmall />}
-          {isSuccess && items}
+          {isSuccess && <MmoItemsView mmoList={mmoList} nodeRef={nodeRef} />}
         </div>
       </div>
     </section>

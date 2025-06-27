@@ -18,7 +18,7 @@
     text-transform: uppercase;
   }
 
-  &__inner {
+  &__main-content {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
 
@@ -77,7 +77,7 @@
     }
   }
 
-  &__free {
+  &__price {
     font-weight: 600;
     color: #fff;
     font-size: 12px;
@@ -88,7 +88,7 @@
     letter-spacing: 0.5px;
   }
 
-  &__spinner {
+  &__loading-state {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -127,7 +127,7 @@
   .mmo {
     padding: 30px 0;
 
-    &__inner {
+    &__main-content {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
     }
@@ -136,7 +136,7 @@
       margin-bottom: 10px;
     }
 
-    &__spinner {
+    &__loading-state {
       height: 400px;
     }
   }
@@ -146,7 +146,7 @@
   .mmo {
     padding: 20px 0;
 
-    &__inner {
+    &__main-content {
       display: grid;
       grid-template-columns: repeat(1, 1fr);
     }
@@ -155,7 +155,7 @@
       margin-bottom: 10px;
     }
 
-    &__spinner {
+    &__loading-state {
       height: 810px;
     }
   }

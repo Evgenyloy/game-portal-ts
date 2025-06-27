@@ -23,8 +23,8 @@ export const getFilteredGames = async ({
   platform,
   category,
   sort,
-}: IFilteredGamesArgs): Promise<IGamesList> => {
-  return fetchApi<IGamesList>("/games", {
+}: IFilteredGamesArgs): Promise<IGamesList[]> => {
+  return fetchApi<IGamesList[]>("/games", {
     platform,
     category,
     "sort-by": sort,

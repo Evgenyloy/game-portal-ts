@@ -4,7 +4,7 @@ import { useHeaderFiltersStore } from "../../store/headerFiltersStore";
 import { sortItemsView } from "./SortItemsView";
 import { tagItemsView } from "./TagItemsView";
 import { platformItemsView } from "./PlatformItemsView";
-import { PLATFORM_DATA, SORT_DATA, TAGS_LIST_DATA } from "./data";
+import { PLATFORM_DATA, SORT_DATA, TAGS_LIST_DATA } from "./filter-data";
 import { selectPlatform } from "./utils";
 import "./filter.scss";
 

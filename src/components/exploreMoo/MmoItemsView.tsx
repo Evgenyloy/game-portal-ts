@@ -1,8 +1,17 @@
 import { CSSTransition } from "react-transition-group";
 import { IGamesList, TNodeRef } from "../../types/types";
 import { Link } from "react-router-dom";
+import { randomGames } from "./utils";
 
-function MmoItemsView(mmo: IGamesList[], nodeRef: TNodeRef) {
+function MmoItemsView({
+  mmoList,
+  nodeRef,
+}: {
+  nodeRef: TNodeRef;
+  mmoList: IGamesList[];
+}) {
+  const mmo = randomGames(mmoList);
+
   const items = (
     <CSSTransition
       classNames="transition"
@@ -22,7 +31,7 @@ function MmoItemsView(mmo: IGamesList[], nodeRef: TNodeRef) {
                 </div>
                 <div className="mmo__desc-inner">
                   <div className="mmo__desc">{title.toLowerCase()}</div>
-                  <span className="mmo__free">free</span>
+                  <span className="mmo__price">free</span>
                 </div>
               </Link>
             </div>
