@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { ErrorMessage } from "../errorMessage/ErrorMessage";
@@ -35,10 +36,13 @@ const OneGame = () => {
     setPopUp(false);
   };
 
-  const className = isPending || isError ? "game__spinner" : "game";
+  const contentClass = clsx({
+    "game__loading-state": isPending || isError,
+    game: isSuccess,
+  });
 
   return (
-    <article className={className}>
+    <article className={contentClass}>
       {isPending && <Spinner />}
       {isError && <ErrorMessage />}
       {isSuccess && (

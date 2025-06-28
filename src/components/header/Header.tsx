@@ -3,7 +3,7 @@ import HeaderPopUp from "../headerPopUp/HeaderPopUp";
 import { TClickLinkEvent } from "../../types/types";
 import { useHeaderFiltersStore } from "../../store/headerFiltersStore";
 import { popUpStore } from "../../store/popUpStore";
-import { TAGS_DATA } from "./data";
+import { TAGS_DATA, LINK_DATA } from "./header-data";
 import TagsView from "./TagsView";
 import "./header.scss";
 
@@ -23,8 +23,6 @@ function Header() {
     setInput("");
   };
 
-  const tagList = TagsView(TAGS_DATA, setCategory);
-
   return (
     <header className="header">
       <div className="container">
@@ -40,37 +38,21 @@ function Header() {
             </h1>
           </Link>
           <nav className="header__nav">
-            <Link
-              to="game-list"
-              className="header__link"
-              onClick={handleMainLinkClick}
-              data-link="pc"
-            >
-              PC games
-            </Link>
-            <Link
-              to="game-list"
-              className="header__link"
-              onClick={handleMainLinkClick}
-              data-link="browser"
-            >
-              browser games
-            </Link>
-            <Link
-              to="news-list"
-              className="header__link"
-              data-link="news"
-              onClick={() => setInput("")}
-            >
-              news
-            </Link>
-            <Link
-              to="about"
-              className="header__link"
-              onClick={() => setInput("")}
-            >
-              about
-            </Link>
+            {LINK_DATA.map((item, index) => (
+              <Link
+                to={item.link}
+                className="header__link"
+                onClick={
+                  item.link === "game-list"
+                    ? handleMainLinkClick
+                    : () => setInput("")
+                }
+                data-link={item.data}
+                key={index}
+              >
+                {item.name}
+              </Link>
+            ))}
           </nav>
           <div
             className={popupVisible ? "burger active" : "burger"}
@@ -86,7 +68,7 @@ function Header() {
         <div className="container">
           <ul className="sub-menu__list">
             <span className="sub-menu__span">popular tags:</span>
-            {tagList}
+            <TagsView tags={TAGS_DATA} setCategory={setCategory} />
           </ul>
         </div>
       </div>

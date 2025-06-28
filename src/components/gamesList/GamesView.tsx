@@ -3,40 +3,49 @@ import { TbBrowser } from "react-icons/tb";
 import { Link } from "react-router-dom";
 import { IGamesList } from "../../types/types";
 
-function GamesView(filteredGame: IGamesList[]) {
-  const item = filteredGame.map((item) => {
-    const { id, title, thumbnail, genre, short_description, platform } = item;
-    const gif =
-      platform === "PC (Windows), Web Browser" || platform === "Web Browser" ? (
-        <TbBrowser />
-      ) : (
-        <DiWindows />
-      );
-    return (
-      <li className="gamelist__item" key={id}>
-        <div className="gamelist__img-cont">
-          <img
-            src={thumbnail}
-            alt={title}
-            className="gamelist__img"
-            loading="lazy"
-          />
-        </div>
+interface GamesListProps {
+  filteredGame: IGamesList[];
+}
 
-        <Link className="gamelist__link" to={`/game/${id}`}>
-          <h3 className="gamelist__title">{title}</h3>
-        </Link>
+function GamesView({ filteredGame }: GamesListProps) {
+  return (
+    <>
+      {filteredGame.map(
+        ({ id, title, thumbnail, genre, short_description, platform }) => {
+          const gif =
+            platform === "PC (Windows), Web Browser" ||
+            platform === "Web Browser" ? (
+              <TbBrowser />
+            ) : (
+              <DiWindows />
+            );
 
-        <p className="gamelist__desc">{short_description}</p>
-        <div className="gamelist__genre">
-          {genre}
-          {gif}
-        </div>
-      </li>
-    );
-  });
+          return (
+            <li className="game-list__item" key={id}>
+              <div className="game-list__img-cont">
+                <img
+                  src={thumbnail}
+                  alt={title}
+                  className="game-list__img"
+                  loading="lazy"
+                />
+              </div>
 
-  return item;
+              <Link className="game-list__link" to={`/game/${id}`}>
+                <h3 className="game-list__title">{title}</h3>
+              </Link>
+
+              <p className="game-list__desc">{short_description}</p>
+              <div className="game-list__genre">
+                {genre}
+                {gif}
+              </div>
+            </li>
+          );
+        }
+      )}
+    </>
+  );
 }
 
 export default GamesView;

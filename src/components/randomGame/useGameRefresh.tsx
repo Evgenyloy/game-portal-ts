@@ -17,7 +17,7 @@ export const useGameRefresh = (
 
     refetch();
 
-    const timer = setTimeout(() => setIsCooldown(false), 1000);
+    const timer = setTimeout(() => setIsCooldown(false), 500);
     return () => clearTimeout(timer);
   }, [genreHistory, isCooldown, refetch, setGenreHistory]);
 

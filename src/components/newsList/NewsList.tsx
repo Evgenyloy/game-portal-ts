@@ -9,6 +9,7 @@ import { newsStore } from "../../store/newsStore";
 import { useGetNewsList } from "../../hooks/gamesQueries";
 import { useInfinityScroll } from "./useInfinityScroll";
 import "./newsList.scss";
+import { clsx } from "clsx";
 
 const NewsList = () => {
   const {
@@ -41,9 +42,12 @@ const NewsList = () => {
     setNews(oneNews);
   };
 
-  const items = NewsListItem(onNewsLoading(news), newsListRef, onNewsClick);
-  const className =
-    isPending || isError ? "news-list__spinner" : "news-list__inner";
+  const items = onNewsLoading(news);
+
+  const contentClass = clsx({
+    "news-list__loading-state": isPending || isError,
+    "news-list__main-content": isSuccess,
+  });
 
   const randomGameMemo = useMemo(() => <RandomGame />, []);
 
@@ -52,10 +56,16 @@ const NewsList = () => {
       <div className="container">
         <div className="news-list__wrapper">
           <div className="news-list__col-1">
-            <ul className={className} ref={newsListRef}>
+            <ul className={contentClass} ref={newsListRef}>
               {isPending && <Spinner />}
               {isError && <ErrorMessageSmall />}
-              {isSuccess && items}
+              {isSuccess && (
+                <NewsListItem
+                  news={items}
+                  nodeRef={newsListRef}
+                  onNewsClick={onNewsClick}
+                />
+              )}
             </ul>
           </div>
           <div className="news-list__col-2">

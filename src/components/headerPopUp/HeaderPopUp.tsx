@@ -1,8 +1,10 @@
+import clsx from "clsx";
 import { CSSTransition } from "react-transition-group";
 import { useEffect, useState, useRef, useCallback } from "react";
 import { popUpStore } from "../../store/popUpStore";
 import { useHeaderFiltersStore } from "../../store/headerFiltersStore";
 import LinksView from "./LinksView";
+import { LINKS_DATA } from "./headerPopUp-data";
 import "./headerPopUp.scss";
 
 const DESKTOP_WIDTH = 650;
@@ -40,9 +42,10 @@ function HeaderPopUp() {
     }
   }, [windowIsOpen, popUpVisible]);
 
-  const popUpLinks = LinksView(setPlatform, setPopUp);
-  const popUpClass =
-    window.innerWidth >= DESKTOP_WIDTH ? "popup popup-no-visible" : "popup";
+  const popUpClass = clsx(
+    "popup",
+    window.innerWidth >= DESKTOP_WIDTH && "popup-no-visible"
+  );
 
   return (
     <CSSTransition
@@ -57,7 +60,13 @@ function HeaderPopUp() {
       unmountOnExit
     >
       <div className={popUpClass} ref={popUpRef} tabIndex={0}>
-        <nav className="popup__nav">{popUpLinks}</nav>
+        <nav className="popup__nav">
+          <LinksView
+            setPlatform={setPlatform}
+            setPopUp={setPopUp}
+            linksData={LINKS_DATA}
+          />
+        </nav>
       </div>
     </CSSTransition>
   );

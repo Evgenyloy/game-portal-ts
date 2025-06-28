@@ -20,7 +20,7 @@ function ExploreMmo() {
     <section className="mmo">
       <div className="container">
         <div className="mmo__top-side">
-          <div className="mmo__title">Explore mmo games</div>
+          <h2 className="mmo__title">Explore mmo games</h2>
           <div className="mmo__button button">
             <Link to="/game-list">browse all </Link>
           </div>

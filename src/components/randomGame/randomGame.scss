@@ -124,16 +124,7 @@
   padding-top: 200px;
 }
 
-.random-game__refresh-button.disable {
-  color: #b1b1b1;
-  border-color: #b1b1b1;
 
-  &:hover {
-    background-color: #e0e0e0;
-    color: white;
-
-  }
-}
 
 @media (max-width: 1100px) {
   .random-game {

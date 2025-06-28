@@ -1,14 +1,16 @@
-import { CSSTransition } from 'react-transition-group';
-import { Link } from 'react-router-dom';
-import { INews } from '../../types/types';
-import { RefObject } from 'react';
+import { CSSTransition } from "react-transition-group";
+import { Link } from "react-router-dom";
+import { INews } from "../../types/types";
+import { RefObject } from "react";
 
-function NewsListItem(
-  news: INews[],
-  nodeRef: RefObject<HTMLUListElement>,
-  onNewsClick: (oneNews: INews) => void
-) {
-  const item = (
+interface NewsListItemProps {
+  news: INews[];
+  nodeRef: RefObject<HTMLUListElement>;
+  onNewsClick: (oneNews: INews) => void;
+}
+
+function NewsListItem({ news, nodeRef, onNewsClick }: NewsListItemProps) {
+  return (
     <CSSTransition
       classNames="transition"
       nodeRef={nodeRef}
@@ -45,8 +47,6 @@ function NewsListItem(
       </>
     </CSSTransition>
   );
-
-  return item;
 }
 
 export default NewsListItem;

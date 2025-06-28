@@ -2,7 +2,12 @@ import { Link } from "react-router-dom";
 import { IGamesList, TNodeRef } from "../../types/types";
 import { CSSTransition } from "react-transition-group";
 
-function RandomGameView(games: IGamesList[], nodeRef: TNodeRef) {
+interface RandomGameViewProps {
+  games: IGamesList[];
+  nodeRef: TNodeRef;
+}
+
+function RandomGameView({ games, nodeRef }: RandomGameViewProps) {
   return (
     <CSSTransition
       nodeRef={nodeRef}

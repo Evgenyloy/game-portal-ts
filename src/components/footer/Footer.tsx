@@ -32,10 +32,10 @@ const Footer = () => {
         <Link to="." data-link="all" onClick={onMainLinkClick}>
           <span>MMOGAMES</span> PORTAL
         </Link>
-        <Link to="game_list" onClick={onMainLinkClick} data-link="pc">
+        <Link to="game-list" onClick={onMainLinkClick} data-link="pc">
           PC GAMES
         </Link>
-        <Link to="game_list" onClick={onMainLinkClick} data-link="browser">
+        <Link to="game-list" onClick={onMainLinkClick} data-link="browser">
           BROWSER GAMES
         </Link>
         <Link to="news-list" data-link="news" onClick={onBtnUpClick}>

@@ -28,7 +28,6 @@ function RandomGame() {
   );
 
   const displayedGames = games.slice(0, 8);
-  const content = RandomGameView(displayedGames, nodeRef);
 
   return (
     <div className="random-game">
@@ -44,7 +43,7 @@ function RandomGame() {
           }
           aria-label="Refresh games"
         >
-          {"Refresh"}
+          {isCooldown ? "Load..." : "Refresh"}
         </button>
       </div>
 
@@ -60,7 +59,7 @@ function RandomGame() {
             {games.length === 0 ? (
               <p className="random-game__empty">No games found</p>
             ) : (
-              content
+              <RandomGameView games={displayedGames} nodeRef={nodeRef} />
             )}
           </>
         )}

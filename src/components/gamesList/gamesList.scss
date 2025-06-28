@@ -1,12 +1,13 @@
 @import '../../style/variables.scss';
-.gamelist {
+
+.game-list {
   padding-top: 50px;
   padding-bottom: 60px;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 
-  &__inner {
+  &__main-content {
     position: relative;
     display: grid;
     grid-template-columns: repeat(4, minmax(100px, 1fr));
@@ -15,6 +16,7 @@
     align-items: center;
     justify-items: center;
   }
+
   &__item {
     position: relative;
     width: 100%;
@@ -22,13 +24,16 @@
     border-radius: 4px;
     box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
     transition: all 0.1s linear;
+
     &:hover {
       box-shadow: 4px 4px 8px 0px rgba(17, 17, 17, 0.3);
     }
+
     &:focus-within {
       outline: 3px solid orange;
     }
   }
+
   &__genre {
     padding: 0 15px 10px;
 
@@ -38,11 +43,13 @@
     color: #8e8c84;
     font-weight: 600;
     font-size: 16px;
+
     & svg {
       color: rgb(195, 235, 134);
       font-size: 25px;
     }
   }
+
   &__img-cont {
     position: relative;
     height: 180px;
@@ -63,6 +70,7 @@
     font-size: 0;
     margin-bottom: 20px;
   }
+
   &__title {
     font-size: 18px;
     text-align: left;
@@ -88,6 +96,7 @@
 
     margin-bottom: 10px;
   }
+
   &__link {
     &::after {
       position: absolute;
@@ -99,7 +108,8 @@
       content: '';
     }
   }
-  &__spinner {
+
+  &__loading-state {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -107,6 +117,7 @@
     top: 60%;
     left: 50%;
     transform: translate(-50%, -60%);
+
     img {
       display: block;
       max-width: 400px;
@@ -115,6 +126,7 @@
       margin: 0 auto;
     }
   }
+
   &__filterError,
   &__matchError {
     text-align: center;
@@ -125,18 +137,20 @@
 
 //--------------------------------------------------------------------------------------
 @media (max-width: 880px) {
-  .gamelist {
-    &__inner {
+  .game-list {
+    &__main-content {
       grid-template-columns: repeat(2, minmax(150px, 1fr));
     }
   }
 }
+
 @media (max-width: 460px) {
-  .gamelist {
-    &__inner {
+  .game-list {
+    &__main-content {
       grid-template-columns: repeat(1, minmax(220px, 1fr));
     }
-    &__spinner {
+
+    &__loading-state {
       top: 60%;
       transform: translate(-50%, -60%);
     }

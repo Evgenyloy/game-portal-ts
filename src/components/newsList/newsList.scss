@@ -83,7 +83,7 @@
     flex-grow: 1;
   }
 
-  &__spinner {
+  &__loading-state {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -206,7 +206,7 @@
     }
 
     &__desc {
-      display: none;
+      opacity: 0;
     }
 
     &__content-cont {

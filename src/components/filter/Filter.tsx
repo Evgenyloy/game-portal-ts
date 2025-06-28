@@ -1,9 +1,9 @@
 import { useShallow } from "zustand/react/shallow";
 import { BiSearchAlt2 } from "react-icons/bi";
 import { useHeaderFiltersStore } from "../../store/headerFiltersStore";
-import { sortItemsView } from "./SortItemsView";
-import { tagItemsView } from "./TagItemsView";
-import { platformItemsView } from "./PlatformItemsView";
+import { SortItemsView } from "./SortItemsView";
+import { TagItemsView } from "./TagItemsView";
+import { PlatformItemsView } from "./PlatformItemsView";
 import { PLATFORM_DATA, SORT_DATA, TAGS_LIST_DATA } from "./filter-data";
 import { selectPlatform } from "./utils";
 import "./filter.scss";
@@ -31,10 +31,6 @@ function Filter() {
     }))
   );
 
-  const platformList = () => platformItemsView(PLATFORM_DATA, setPlatform);
-  const sortList = () => sortItemsView(SORT_DATA, setSort);
-  const tagList = () => tagItemsView(TAGS_LIST_DATA, setCategory);
-
   const selectedPlatform = selectPlatform(platform);
 
   return (
@@ -42,17 +38,28 @@ function Filter() {
       <div className="dropdown">
         <span>Platforms:</span>
         <div className="dropdown__button">{selectedPlatform}</div>
-        <ul className="dropdown__list">{platformList()}</ul>
+        <ul className="dropdown__list">
+          {
+            <PlatformItemsView
+              platforms={PLATFORM_DATA}
+              onSelect={setPlatform}
+            />
+          }
+        </ul>
       </div>
       <div className="dropdown">
         <span>Genre/Tag:</span>
         <div className="dropdown__button">{category}</div>
-        <ul className="dropdown__list dropdown__list-tag">{tagList()}</ul>
+        <ul className="dropdown__list dropdown__list-tag">
+          {<TagItemsView tags={TAGS_LIST_DATA} onSelect={setCategory} />}
+        </ul>
       </div>
       <div className="dropdown">
         <span>sortBy:</span>
         <div className="dropdown__button">{sort}</div>
-        <ul className="dropdown__list ">{sortList()}</ul>
+        <ul className="dropdown__list ">
+          {<SortItemsView sorting={SORT_DATA} onSelect={setSort} />}
+        </ul>
       </div>
       <div className="filter">
         <input

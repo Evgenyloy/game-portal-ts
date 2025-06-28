@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { clsx } from "clsx";
 import { useHeaderFiltersStore } from "../../store/headerFiltersStore";
 import Filter from "../filter/Filter";
 import Spinner from "../spinner/Spinner";
@@ -15,36 +16,36 @@ function GamesList() {
     data: filteredGame = [],
     isError,
     isSuccess,
-    error,
+    isPending,
   } = useGetFilteredGames({ platform, category, sort });
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  const content = GamesView(
-    Array.isArray(filteredGame) ? filterGames(inputSearch, filteredGame) : []
-  );
+  const content = filterGames(inputSearch, filteredGame);
 
-  const className =
-    isLoading || isError || content.length === 0 || error
-      ? "gamelist__spinner"
-      : "gamelist__inner";
+  const containerClasses = clsx({
+    "game-list__main-content": isSuccess,
+    "game-list__loading-state": isPending || isError || !content?.length,
+  });
 
   return (
-    <section className="gamelist">
+    <section className="game-list">
       <div className="container">
         <Filter />
-        <ul className={className}>
+        <ul className={containerClasses}>
           {isLoading && <Spinner />}
           {isError && <ErrorMessage />}
-          {content?.length === 0 && isSuccess ? (
-            <div className="gamelist__filterError">
+          {!content?.length && isSuccess ? (
+            <div className="game-list__filterError">
               There are no games that match these filters
             </div>
           ) : null}
 
-          {isSuccess && content?.length > 0 ? content : null}
+          {isSuccess && content?.length > 0 ? (
+            <GamesView filteredGame={content} />
+          ) : null}
         </ul>
       </div>
     </section>

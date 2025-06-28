@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef } from "react";
+import clsx from "clsx";
 import { ErrorMessage } from "../errorMessage/ErrorMessage";
 import Spinner from "../spinner/Spinner";
 import { newsStore } from "../../store/newsStore";
@@ -22,23 +23,29 @@ function NewsBlock() {
     newsList.current = document.querySelector(".news-list");
   }, [handleButtonClick]);
 
-  const content = NewsView(onNewsLoaded(news), setNews, nodeRef);
-  const className = isPending || isError ? "news__spinner" : "news__inner";
+  const content = onNewsLoaded(news);
+
+  const contentClassName = clsx({
+    "news__main-content": isSuccess,
+    "news__loading-state": isPending || isError,
+  });
 
   return (
     <section className="news">
       <div className="container">
         <div className="news__top">
-          <div className="news__info">Last news</div>
+          <h2 className="news__info-title">Last news</h2>
           <div className="news__button button">
             <button onClick={() => handleButtonClick()}>browse all</button>
           </div>
         </div>
 
-        <div className={className} ref={nodeRef}>
+        <div className={contentClassName} ref={nodeRef}>
           {isError && <ErrorMessage />}
           {isPending && <Spinner />}
-          {isSuccess && content}
+          {isSuccess && (
+            <NewsView content={content} setNews={setNews} nodeRef={nodeRef} />
+          )}
         </div>
       </div>
     </section>
