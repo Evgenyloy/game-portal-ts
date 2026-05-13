@@ -28,7 +28,7 @@ function RandomGameView({ games, nodeRef }: RandomGameViewProps) {
               />
             </div>
             <div className="random-game__content">
-              <Link to={`game/${id}`} className="random-game__link">
+              <Link to={`/game/${id}`} className="random-game__link">
                 <p className="random-game__text line-clamp">
                   {short_description?.slice(0, 70) + "..." || ""}
                 </p>
