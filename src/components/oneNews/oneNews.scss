@@ -73,13 +73,15 @@
   }
 }
 iframe {
-  width: 100% !important;
-  height: 420px !important;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  border: none;
+  border-radius: 8px;
   //background-color: lightgray;
-  background-image: url('./Screenshot_6.png');
-  background-repeat:no-repeat;
-  background-size:auto;
-  
+  background-image: url("./Screenshot_6.png");
+  background-repeat: no-repeat;
+  background-size: auto;
 }
 
 @media (max-width: 820px) {

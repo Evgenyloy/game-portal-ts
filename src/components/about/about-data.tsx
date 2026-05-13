@@ -2,7 +2,7 @@ export const aboutData = [
   {
     title: "GitHub:",
     text: "Game Portal",
-    link: "https://github.com/Evgenyloy/gamePortal",
+    link: "https://github.com/Evgenyloy/game-portal-ts",
   },
   {
     title: "API:",
