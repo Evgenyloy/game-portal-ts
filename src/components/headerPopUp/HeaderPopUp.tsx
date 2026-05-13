@@ -40,11 +40,11 @@ function HeaderPopUp() {
     if (windowIsOpen) {
       setPopUp();
     }
-  }, [windowIsOpen, popUpVisible]);
+  }, [windowIsOpen, popUpVisible, setPopUp]);
 
   const popUpClass = clsx(
     "popup",
-    window.innerWidth >= DESKTOP_WIDTH && "popup-no-visible"
+    window.innerWidth >= DESKTOP_WIDTH && "popup-no-visible",
   );
 
   return (

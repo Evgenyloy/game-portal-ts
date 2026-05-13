@@ -22,12 +22,11 @@ const NewsList = () => {
   const setNews = newsStore.use.setNews();
 
   const newsListRef = useRef<HTMLUListElement>(null);
-
   let newsListCopy: INews[] = [];
 
   const onNewsLoading = (news: INews[]): INews[] => {
     const filteredNews = news.filter(
-      (item) => !item.article_content.includes("&lt")
+      (item) => !item.article_content.includes("&lt"),
     );
     const newsList = filteredNews.slice(0, itemPerPage);
 

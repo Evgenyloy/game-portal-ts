@@ -5,7 +5,7 @@ import { RefObject } from "react";
 
 interface NewsListItemProps {
   news: INews[];
-  nodeRef: RefObject<HTMLUListElement>;
+  nodeRef: RefObject<HTMLUListElement | null>;
   onNewsClick: (oneNews: INews) => void;
 }
 

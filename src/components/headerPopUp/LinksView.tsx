@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { TClickLinkEvent } from "../../types/types";
 
-interface LinksView {
+interface ILinksView {
   setPlatform: (platform: string) => void;
   setPopUp: () => void;
   linksData: {
@@ -11,7 +11,7 @@ interface LinksView {
   }[];
 }
 
-function LinksView({ linksData, setPlatform, setPopUp }: LinksView) {
+function LinksView({ linksData, setPlatform, setPopUp }: ILinksView) {
   const handleLinkClick = (e: TClickLinkEvent) => {
     if (!(e.target instanceof HTMLAnchorElement)) return;
     setPlatform(e.target.dataset.link as string);

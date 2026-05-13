@@ -20,7 +20,7 @@ export const useInfinityScroll = (newsListCopy: INews[]) => {
 
     document.addEventListener("scroll", scrollHandler);
     return () => document.removeEventListener("scroll", scrollHandler);
-  }, [itemPerPage]);
+  }, [itemPerPage, newsListCopy.length]);
 
   return { itemPerPage };
 };
