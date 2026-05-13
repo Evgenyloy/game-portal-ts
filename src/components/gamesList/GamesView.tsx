@@ -1,7 +1,7 @@
 import { DiWindows } from "react-icons/di";
 import { TbBrowser } from "react-icons/tb";
 import { Link } from "react-router-dom";
-import { IGamesList } from "../../types/types";
+import type { IGamesList } from "../../types/types";
 
 interface GamesListProps {
   filteredGame: IGamesList[];

@@ -1,3 +1,5 @@
+import type { GENRES } from "../components/randomGame/utils";
+
 export interface IInitialFiltersState {
   platform: string;
   category: string;
@@ -86,7 +88,7 @@ export interface ITagsData {
 export interface IOneGameScreenshotsProps {
   selectedGame: IGame;
   handleScreenshotClick: (
-    e: React.MouseEvent<HTMLImageElement, MouseEvent>
+    e: React.MouseEvent<HTMLImageElement, MouseEvent>,
   ) => void;
 }
 
@@ -103,10 +105,12 @@ export interface IOneGameInfoProps {
 export interface IRenderGameViewProps {
   selectedGame: IGame;
   handleScreenshotClick: (
-    e: React.MouseEvent<HTMLImageElement, MouseEvent>
+    e: React.MouseEvent<HTMLImageElement, MouseEvent>,
   ) => void;
 }
 
 export interface IOneGameRequirementsProps {
   selectedGame: IGame;
 }
+
+export type GameGenre = (typeof GENRES)[number];

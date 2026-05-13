@@ -1,10 +1,11 @@
 import { useState, useCallback } from "react";
-import { GameGenre, getNewGenre } from "./utils";
+import { getNewGenre } from "./utils";
+import type { GameGenre } from "../../types/types";
 
 export const useGameRefresh = (
   refetch: () => void,
   genreHistory: GameGenre[],
-  setGenreHistory: (update: (prev: GameGenre[]) => GameGenre[]) => void
+  setGenreHistory: (update: (prev: GameGenre[]) => GameGenre[]) => void,
 ) => {
   const [isCooldown, setIsCooldown] = useState(false);
 

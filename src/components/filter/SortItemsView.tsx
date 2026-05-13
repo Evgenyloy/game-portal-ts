@@ -1,5 +1,5 @@
 import { isHTMLElement } from "../../tools/tools";
-import { dropdownItem, TMouseEvent } from "../../types/types";
+import type { dropdownItem, TMouseEvent } from "../../types/types";
 
 interface SortItemsViewProps {
   sorting: dropdownItem[];

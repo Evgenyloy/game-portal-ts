@@ -1,5 +1,10 @@
 import { fetchApi } from "./fetchApi";
-import { IFilteredGamesArgs, IGame, IGamesList, INews } from "../types/types";
+import type {
+  IFilteredGamesArgs,
+  IGame,
+  IGamesList,
+  INews,
+} from "../types/types";
 
 export const getNewsList = async (): Promise<INews[]> => {
   return fetchApi<INews[]>("/latestnews");
@@ -10,7 +15,7 @@ export const getMmoGames = async (): Promise<IGamesList[]> => {
 };
 
 export const getGamesByCategory = async (
-  category: string = "mmo"
+  category: string = "mmo",
 ): Promise<IGamesList[]> => {
   return fetchApi<IGamesList[]>("/games", { category });
 };

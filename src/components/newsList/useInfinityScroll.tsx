@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { INews } from "../../types/types";
+import type { INews } from "../../types/types";
 
 export const useInfinityScroll = (newsListCopy: INews[]) => {
   const [itemPerPage, setItemPerPage] = useState<number>(10);

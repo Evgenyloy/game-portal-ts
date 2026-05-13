@@ -1,4 +1,4 @@
-import { IOneGameRequirementsProps } from "../../types/types";
+import type { IOneGameRequirementsProps } from "../../types/types";
 import "./oneGame.scss";
 
 const OneGameRequirements = (props: IOneGameRequirementsProps) => {

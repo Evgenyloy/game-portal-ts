@@ -1,4 +1,4 @@
-import { INews } from "../../types/types";
+import type { INews } from "../../types/types";
 
 export const onNewsLoaded = (news: INews[]) => {
   const filteredNews = news.filter(

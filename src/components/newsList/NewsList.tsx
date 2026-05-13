@@ -2,7 +2,7 @@ import { useRef, useMemo } from "react";
 import Spinner from "../spinner/Spinner";
 import { ErrorMessageSmall } from "../errorMessage/ErrorMessage";
 import RandomGame from "../randomGame/RandomGame";
-import { INews } from "../../types/types";
+import type { INews } from "../../types/types";
 import NewsListItem from "./NewsListItem";
 import ScrollUpButton from "./ScrollUpButton";
 import { newsStore } from "../../store/newsStore";
@@ -55,6 +55,7 @@ const NewsList = () => {
       <div className="container">
         <div className="news-list__wrapper">
           <div className="news-list__col-1">
+            <h2 className="news-list__main-title">Gaming news</h2>
             <ul className={contentClass} ref={newsListRef}>
               {isPending && <Spinner />}
               {isError && <ErrorMessageSmall />}

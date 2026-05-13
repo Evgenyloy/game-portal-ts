@@ -1,5 +1,5 @@
 import { isHTMLElement } from "../../tools/tools";
-import { TMouseEvent, TTagsListData } from "../../types/types";
+import type{ TMouseEvent, TTagsListData } from "../../types/types";
 
 interface TagItemsViewPRoms {
   tags: TTagsListData;

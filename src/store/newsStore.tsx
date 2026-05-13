@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 import { createSelectors } from "./createSelectors ";
-import { INews } from "../types/types";
+import type { INews } from "../types/types";
 
 type NewsState = {
   selectedNews: INews;

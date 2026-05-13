@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { INews, TNodeRef } from "../../types/types";
+import type { INews, TNodeRef } from "../../types/types";
 import { CSSTransition } from "react-transition-group";
 
 interface NewsViewProps {

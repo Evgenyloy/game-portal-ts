@@ -25,4 +25,4 @@
 | Инструменты    | CRA                                    |
 
 ## Запуск
-npm start
+npm run dev

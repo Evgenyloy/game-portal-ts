@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { TClickLinkEvent } from "../../types/types";
+import type { TClickLinkEvent } from "../../types/types";
 
 interface ILinksView {
   setPlatform: (platform: string) => void;

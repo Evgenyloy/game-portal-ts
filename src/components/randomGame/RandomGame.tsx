@@ -3,7 +3,8 @@ import { ErrorMessageSmall } from "../errorMessage/ErrorMessage";
 import Spinner from "../spinner/Spinner";
 import { useGetGamesByCategory } from "../../hooks/gamesQueries";
 import RandomGameView from "./RandomGameView";
-import { GameGenre, GENRES } from "./utils";
+import {  GENRES } from "./utils";
+import type { GameGenre } from "../../types/types";
 import { useGameRefresh } from "./useGameRefresh";
 import "./randomGame.scss";
 

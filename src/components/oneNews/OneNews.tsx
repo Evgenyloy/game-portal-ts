@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useMemo } from "react";
+import  { useEffect, useRef, useMemo } from "react";
 import { CSSTransition } from "react-transition-group";
 import { newsStore } from "../../store/newsStore";
 import "./oneNews.scss";

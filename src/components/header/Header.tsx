@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import HeaderPopUp from "../headerPopUp/HeaderPopUp";
-import { TClickLinkEvent } from "../../types/types";
+import type { TClickLinkEvent } from "../../types/types";
 import { useHeaderFiltersStore } from "../../store/headerFiltersStore";
 import { popUpStore } from "../../store/popUpStore";
 import { TAGS_DATA, LINK_DATA } from "./header-data";

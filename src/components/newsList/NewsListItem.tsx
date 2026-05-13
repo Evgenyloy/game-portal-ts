@@ -1,7 +1,7 @@
 import { CSSTransition } from "react-transition-group";
 import { Link } from "react-router-dom";
-import { INews } from "../../types/types";
-import { RefObject } from "react";
+import type { INews } from "../../types/types";
+import type { RefObject } from "react";
 
 interface NewsListItemProps {
   news: INews[];

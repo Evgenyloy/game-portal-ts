@@ -1,3 +1,5 @@
+import type { GameGenre } from "../../types/types";
+
 export const GENRES = [
   "moba",
   "shooter",
@@ -6,7 +8,7 @@ export const GENRES = [
   "racing",
 ] as const;
 
-export type GameGenre = (typeof GENRES)[number];
+
 
 export const getNewGenre = (genreHistory: GameGenre[]): GameGenre => {
   const lastGenre = genreHistory[genreHistory.length - 1];

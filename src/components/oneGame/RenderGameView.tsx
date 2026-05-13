@@ -3,7 +3,7 @@ import OneGameInfo from "./OneGameInfo";
 import OneGameScreenshots from "./OneGameScreenshots";
 import { CSSTransition } from "react-transition-group";
 import { useRef } from "react";
-import { IRenderGameViewProps } from "../../types/types";
+import type { IRenderGameViewProps } from "../../types/types";
 
 const RenderGameView = ({
   selectedGame,

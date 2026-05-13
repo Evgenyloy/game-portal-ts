@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ITagsData, TClickLinkEvent } from "../../types/types";
+import type { ITagsData, TClickLinkEvent } from "../../types/types";
 
 interface TagsViewProps {
   tags: ITagsData[];

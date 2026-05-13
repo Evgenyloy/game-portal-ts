@@ -1,3 +1,5 @@
+@use "./variables" as *;
+
 .button {
   border: 1px solid $button-color;
   border-radius: 4px;

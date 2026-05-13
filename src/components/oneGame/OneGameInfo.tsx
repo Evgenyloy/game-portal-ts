@@ -1,4 +1,4 @@
-import { IOneGameInfoProps } from "../../types/types";
+import type { IOneGameInfoProps } from "../../types/types";
 import "./oneGame.scss";
 
 const OneGameInfo = (props: IOneGameInfoProps) => {

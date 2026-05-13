@@ -1,4 +1,4 @@
-import { dropdownItem, TTagsListData } from "../../types/types";
+import type { dropdownItem, TTagsListData } from "../../types/types";
 
 export const PLATFORM_DATA: dropdownItem[] = [
   { name: "All platform", dataAtr: "all", id: "platformSelected" },

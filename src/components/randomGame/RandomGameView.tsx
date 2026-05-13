@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { IGamesList, TNodeRef } from "../../types/types";
+import type { IGamesList, TNodeRef } from "../../types/types";
 import { CSSTransition } from "react-transition-group";
 
 interface RandomGameViewProps {

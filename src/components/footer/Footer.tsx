@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { TClickLinkEvent } from "../../types/types";
+import type { TClickLinkEvent } from "../../types/types";
 import { useHeaderFiltersStore } from "../../store/headerFiltersStore";
 import { useShallow } from "zustand/react/shallow";
 import "./footer.scss";

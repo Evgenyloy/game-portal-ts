@@ -1,4 +1,4 @@
-import { IGamesList } from "../../types/types";
+import type { IGamesList } from "../../types/types";
 
 export function filterGames(searchText: string, listOfGames: IGamesList[]) {
   if (!listOfGames.length) return listOfGames;

@@ -1,5 +1,5 @@
 import { CSSTransition } from "react-transition-group";
-import { IGamesList, TNodeRef } from "../../types/types";
+import type { IGamesList, TNodeRef } from "../../types/types";
 import { Link } from "react-router-dom";
 import { randomGames } from "./utils";
 

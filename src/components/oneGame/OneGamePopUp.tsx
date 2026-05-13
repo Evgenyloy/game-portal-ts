@@ -1,7 +1,7 @@
 import { CSSTransition } from "react-transition-group";
 import { ImCross } from "react-icons/im";
 import { useRef } from "react";
-import { IOneGamePopUpProps } from "../../types/types";
+import type { IOneGamePopUpProps } from "../../types/types";
 import "./oneGame.scss";
 
 const OneGamePopUp = ({

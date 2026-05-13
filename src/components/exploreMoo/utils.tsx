@@ -1,4 +1,4 @@
-import { IGamesList } from "../../types/types";
+import type { IGamesList } from "../../types/types";
 
 export function randomGames(mmo: IGamesList[]) {
   let randomNum = Math.floor(Math.random() * 150);

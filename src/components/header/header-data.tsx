@@ -1,4 +1,4 @@
-import { ITagsData } from "../../types/types";
+import type { ITagsData } from "../../types/types";
 
 export const TAGS_DATA: ITagsData[] = [
   { name: "Free MMORPG", data: "mmorpg" },

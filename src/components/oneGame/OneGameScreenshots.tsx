@@ -1,4 +1,4 @@
-import { IGame, IOneGameScreenshotsProps } from "../../types/types";
+import type { IGame, IOneGameScreenshotsProps } from "../../types/types";
 import SpinnerImg from "../spinner/SpinnerImg";
 import "./oneGame.scss";
 
