@@ -5,7 +5,7 @@ import Spinner from "../spinner/Spinner";
 import { useGetMmoGame } from "../../hooks/gamesQueries";
 import MmoItemsView from "./MmoItemsView";
 import { ErrorMessageSmall } from "../errorMessage/ErrorMessage";
-import "../exploreMoo/exploreMoo.scss";
+import "./exploreMmo.scss";
 
 function ExploreMmo() {
   const { data: mmoList = [], isError, isSuccess, isPending } = useGetMmoGame();
