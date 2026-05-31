@@ -33,7 +33,7 @@ export const useHeaderFiltersStore = create<
               state.platform = platform;
             },
             false,
-            "setPlatform"
+            "setPlatform",
           );
         },
 
@@ -43,7 +43,7 @@ export const useHeaderFiltersStore = create<
               state.category = category;
             },
             false,
-            "setCategory"
+            "setCategory",
           );
         },
 
@@ -53,7 +53,7 @@ export const useHeaderFiltersStore = create<
               state.sort = sort;
             },
             false,
-            "setSort"
+            "setSort",
           );
         },
 
@@ -63,11 +63,11 @@ export const useHeaderFiltersStore = create<
           });
         },
       })),
-      { name: "headerFilter-storage" }
+      { name: "headerFilter-storage" },
     ),
     {
       name: "headerFilterStore",
-      enabled: process.env.NODE_ENV !== "production",
-    }
-  )
+      enabled: import.meta.env.NODE_ENV !== "production",
+    },
+  ),
 );
